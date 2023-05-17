@@ -468,7 +468,7 @@ class Parser {
 				sixthLastToken = this.tokens.get(size - 6);
 			}
 
-
+			
 
 			// if the last token is a digit
 			if(lastToken.type == 1){
@@ -679,6 +679,21 @@ public class Calculator {
 		Parser parser = new Parser(expression);
 		result = parser.evaluate();
 		return result;
+	}
+
+
+	public static void main(String[] args) {
+		// You can use the main function for testing your scanner and parser
+		// The following is an example:
+		// Calculator calculator = new Calculator();
+		// String expression = "1+2+3+4+5+6+7+8+9+10";
+		// try {
+		// 	double result = calculator.calculate(expression);
+		// 	System.out.println("The result of " + expression + " is " + result);
+		// } catch (ExpressionException e) {
+		// 	System.out.println(e.getMessage());
+		// }
+		System.out.println("Hello World!");
 	}
 
 }

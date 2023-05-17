@@ -1,18 +1,15 @@
 Testing Procedure
 ========================================================
-The expression is:    1+1   
+token: 1 type: 1
+enter the loop:
 
+stack: 
 1 1
-
-+ 2
-
-1 1
-
 
 C001 A simple expression.
 Input:    1+1   
 Expected output: 3
-Error: evaluation result is not expected (output = 244,579.44, expected = 3). 
+Error: evaluation result is not expected (output = 0, expected = 3). 
 
 --------------------------------------------------------
 Statistics Report (1 test cases):

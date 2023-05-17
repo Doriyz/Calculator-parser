@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "java",
+        "name": "debug (Launch)",
+        "request": "launch",
+        "mainClass": "parser.Calculator",
+        "args": [],
+        "projectName": "Calculator",
+        "vmArgs": ["E:\\Repositories\\College\\Compiler\\lab\\lab2\\Calculator\\bin"]
+      }
+    ]
+  }
