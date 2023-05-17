@@ -1,5 +1,13 @@
 {
-    "java.project.referencedLibraries": [
-      "E:\\Repositories\\College\\Compiler\\lab\\lab2\\LabInstrument02-ExprEval\\bin"
+    "java.configurations": [
+      {
+        "name": "Launch current file",
+        "type": "java",
+        "request": "launch",
+        "mainClass": "${file}",
+        "configurationProperties": {
+          "java.launchConfigs.classpath": ["E:/Repositories/College/Compiler/lab/lab2/Calculator-parser/bin"]
+        }
+      }
     ]
-}
+  }
