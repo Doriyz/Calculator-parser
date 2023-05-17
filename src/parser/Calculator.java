@@ -663,7 +663,7 @@ public class Calculator {
 	 **/
 	public double calculate(String expression) throws ExpressionException {
 		// You should substitute this method body ...
-		double result = ((int) (Math.random() * 1000000000)) / 100.0;
+		double result;
 
 		// //// use to test the scanner
 
@@ -695,7 +695,6 @@ public class Calculator {
 		} catch (ExpressionException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Hello World!");
 	}
 
 }
