@@ -14,7 +14,7 @@
             "type": "java",
             "name": "Calculator",
             "request": "launch",
-            "mainClass": "parser.Calculator",
+            // "mainClass": "parser.Calculator",
             "projectName": "Calculator-parser_32f8f18d",
             "classPaths": ["E:/Repositories/College/Compiler/lab/lab2/Calculator-parser/bin"]
         }

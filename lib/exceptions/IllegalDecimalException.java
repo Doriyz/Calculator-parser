@@ -1,3 +1,5 @@
+package exceptions;
+
 import exceptions.LexicalException;
 
 public class IllegalDecimalException extends LexicalException {

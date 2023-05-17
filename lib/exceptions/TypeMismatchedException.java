@@ -1,3 +1,5 @@
+package exceptions;
+
 import exceptions.SemanticException;
 
 public class TypeMismatchedException extends SemanticException {

@@ -1,3 +1,5 @@
+package exceptions;
+
 import exceptions.ExpressionException;
 
 public class SyntacticException extends ExpressionException {

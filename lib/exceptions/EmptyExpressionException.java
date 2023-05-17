@@ -1,3 +1,5 @@
+package exceptions;
+
 import exceptions.SyntacticException;
 
 public class EmptyExpressionException extends SyntacticException {
