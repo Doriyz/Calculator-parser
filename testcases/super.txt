@@ -1,0 +1,1586 @@
+Testing Procedure
+========================================================
+
+C0001 Expression with relational and logical operations.
+Input: (1.111 >= 1.112) ? 312 : 125
+Expected output: 125
+Passed !
+
+C0002 Predefined functions.
+Input: min(cos(0.45), sin(1.25), cos(sin(cos(0.15))))
+Expected output: 0.6709
+Passed !
+
+C0003 Predefined functions.
+Input: cos(cos(min(142, min(cos(0.45), sin(1.25), cos(sin(cos(0.15)))), 2 + 3 ^ 2, 4 * 3.14E2)))
+Expected output: 0.7086
+Passed !
+
+C0004 A simple expression.
+Input: 3125e-6*-8+-6*max(sin(1.2),cos(3.6),(4+2>5)?min(2,10/3-2):6)
+Expected output: -8.025
+Passed !
+
+C0005 A simple expression with min.
+Input: MIN(7e3,3.14e-0)
+Expected output: 3.14
+Error: wrong detection for a correct input (exceptions.IllegalIdentifierException: Not a predefined identifier.). 
+
+C0006 Expression with arithmetic operations.
+Input:  (60 + 2 *( (12 / 4) ^ 2))+1.22E+2
+Expected output: 200
+Passed !
+
+C0007 Expression with arithmetic operations.
+Input: 2.25E+2 - (55.5 + 4 * (10 / 2) ^ 2)
+Expected output: 69.5
+Passed !
+
+C0008 A simple expression.
+Input: 9 - 3 * 2
+Expected output: 3
+Passed !
+
+C0009 Expression with arithmetic operations.
+Input: 2.25E+2 - (55.5 + 4 * (10 / 2) ^ 2)
+Expected output: 69.5
+Passed !
+
+C0010 Expression with arithmetic operations.
+Input: 65 / 5 - 130e-1
+Expected output: 0.0
+Passed !
+
+C0011 A simple expression.
+Input: 9 - 3 * 2
+Expected output: 3
+Passed !
+
+C0012 Expression with arithmetic operations.
+Input: 2.25E+2 - (55.5 + 4 * (10 / 2) ^ 2)
+Expected output: 69.5
+Passed !
+
+C0013 Expression with arithmetic operations.
+Input: 2.25E+2 - (55.5 + 4 * (10 / 2) ^ 2)
+Expected output: 69.5
+Passed !
+
+C0014 a simple case
+Input: 23+(43)+5
+Expected output: 71
+Passed !
+
+C0015 Expression with arithmetic operations.
+Input: 65 / 5 - 130e-1
+Expected output: 0.0
+Passed !
+
+C0016 Expression with relational and logical operations.
+Input: (5 > 3) & (4 < 8) ? 15 : 16
+Expected output: 15
+Passed !
+
+C0017 Predefined functions.
+Input: max(sin(0.15), cos(0.15), sin(cos(0.15)))
+Expected output: 0.98877
+Passed !
+
+C0018 Predefined functions.
+Input: sin(min(12, 3 * 5, 2 + 3 ^ 2, 3.14E2))
+Expected output: -0.99999
+Passed !
+
+C0019 A simple expression.
+Input: 1>2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0020 A simple expression.
+Input: 1>=2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0021 A simple expression.
+Input: 1=2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0022 A simple expression.
+Input: 1< 2 ?3:4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0023 A simple expression.
+Input: 1<=2 ? 3 : 4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0024 A simple expression.
+Input: 1<>2 ? 3 : 4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0025 Expression with arithmetic operations.
+Input:  (60 + 2 *( (12 / 4) ^ 2))+1.22E+2
+Expected output: 200
+Passed !
+
+C0026 select
+Input: true?true?123:false?23:43:5
+Expected output: 123
+Passed !
+
+C0027 Expression with relational and logical operations.
+Input: 1>2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0028 Expression with relational and logical operations.
+Input: 1>=2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0029 Expression with relational and logical operations.
+Input: 1=2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0030 Expression with relational and logical operations.
+Input: 1< 2 ?3:4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0031 Expression with relational and logical operations.
+Input: 1<=2 ? 3 : 4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0032 Expression with relational and logical operations.
+Input: 1<>2 ? 3 : 4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C0033 Expression with arithmetic operations.
+Input: 2.25E+2 - (55.5 + -4 * (10 / 2) ^ 2)
+Expected output: 269.5
+Passed !
+
+C0034 A simple expression.
+Input: -99 ---3 * 2
+Expected output: -105
+Passed !
+
+C0035 Expression with arithmetic operations.
+Input: 51.3E+2 - (123 ^2)
+Expected output: -9999
+Passed !
+
+C0036 Expression with arithmetic operations.
+Input: 673 / 54 - 273e-10
+Expected output: 12.463
+Passed !
+
+C0037 A simple expression.
+Input: 1292313 ---32142 * 2124
+Expected output: -66977295
+Passed !
+
+C0038 Expression with arithmetic operations.
+Input: 1.23214E+20 - (213152541.5 + 42144 * (31410 / 2411445) ^ 6)
+Expected output: 123213999999786840000
+Passed !
+
+C0039 Expression with arithmetic operations.
+Input: 21465 / 25.4124 - 123e-3
+Expected output: 844.5434
+Passed !
+
+E0001 SyntacticException.
+Input: (max5, 6, 8)
+Expected output: FunctionCallException
+Passed !
+
+E0002 IllegalDecimalException
+Input: 12.3Emax(4, 5, 6)
+Expected output: IllegalDecimalException
+Passed !
+
+E0003 IllegalDecimalException
+Input: min(4., 7)
+Expected output: IllegalDecimalException
+Passed !
+
+E0004 IllegalDecimalException
+Input: 4+10.E+5+1
+Expected output: IllegalDecimalException
+Passed !
+
+E0005 Operand expected.
+Input: (1 + 2) ^ (3 - ) + 5
+Expected output: MissingOperandException
+Passed !
+
+E0006 IllegalIdentifierException
+Input: 4+mix(5,2)+1
+Expected output: IllegalIdentifierException
+Passed !
+
+E0007 Type mismatched.
+Input: (13 < 2 * 5) + 12
+Expected output: TypeMismatchedException
+Passed !
+
+E0008 DividedByZeroException
+Input: 4/(12-3*4)+1
+Expected output: DividedByZeroException
+Passed !
+
+E0009 FunctionCallException
+Input: sin(2,1)
+Expected output: FunctionCallException
+Passed !
+
+E0010 FunctionCallException
+Input: max5, 6, 8)
+Expected output: FunctionCallException
+Passed !
+
+E0011 IllegalDecimalException
+Input: 4.
+Expected output: IllegalDecimalException
+Passed !
+
+E0012 IllegalDecimalException
+Input: .7
+Expected output: IllegalDecimalException
+Passed !
+
+E0013 IllegalDecimalException
+Input: 4.E+3
+Expected output: IllegalDecimalException
+Passed !
+
+E0014 IllegalIdentifierException
+Input: E6
+Expected output: IllegalIdentifierException
+Passed !
+
+E0015 IllegalSymbolException
+Input: 5@
+Expected output: IllegalSymbolException
+Passed !
+
+E0016 IllegalDecimalException
+Input: 3.e3 + 1
+Expected output: IllegalDecimalException
+Passed !
+
+E0017 IllegalDecimalException
+Input: 4 + 10.E+5 + 1
+Expected output: IllegalDecimalException
+Passed !
+
+E0018 IllegalDecimalException
+Input: 3.3e3.3 + 1
+Expected output: IllegalDecimalException
+Passed !
+
+E0019 IllegalDecimalException
+Input: 1 + 3.3E.3 + 2
+Expected output: IllegalDecimalException
+Passed !
+
+E0020 IllegalDecimalException
+Input: 1 + 3.3E?(3 + 2)
+Expected output: IllegalDecimalException
+Passed !
+
+E0021 IllegalDecimalException
+Input: min(4., 7)
+Expected output: IllegalDecimalException
+Passed !
+
+E0022 IllegalDecimalException
+Input: 12.3Emax(4, 5, 6)
+Expected output: IllegalDecimalException
+Passed !
+
+E0023 IllegalIdentifierException
+Input: TAG
+Expected output: IllegalIdentifierException
+Passed !
+
+E0024 IllegalIdentifierException
+Input: mix
+Expected output: IllegalIdentifierException
+Passed !
+
+E0025 IllegalIdentifierException
+Input: 5 / v4 + 1
+Expected output: IllegalIdentifierException
+Passed !
+
+E0026 IllegalIdentifierException
+Input: 4 + mix(5, 2) + 1
+Expected output: IllegalIdentifierException
+Passed !
+
+E0027 IllegalSymbolException
+Input: 5@34
+Expected output: IllegalSymbolException
+Passed !
+
+E0028 IllegalSymbolException
+Input: (5@4)?7:8
+Expected output: IllegalSymbolException
+Passed !
+
+E0029 IllegalSymbolException
+Input: (5 +4)+	4
+Expected output: IllegalSymbolException
+Passed !
+
+E0030 MissingLeftParenthesisException
+Input: (2+3)^3)-((1+1)
+Expected output: MissingLeftParenthesisException
+Passed !
+
+E0031 MissingOperandException
+Input: (1+2)^(3-)+5
+Expected output: MissingOperandException
+Passed !
+
+E0032 MissingOperandException
+Input: 3>2.5*1.5?9:
+Expected output: MissingOperandException
+Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+
+E0033 MissingOperandException
+Input: 3.14*2>=2.5*3?(6:7)+8
+Expected output: TrinaryOperationException
+Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+
+E0034 MissingOperandException
+Input: 7>0?7<=0?:6:5
+Expected output: MissingOperandException
+Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+
+E0035 MissingOperandException
+Input: sin()
+Expected output: MissingOperandException
+Passed !
+
+E0036 MissingOperandException
+Input: cos(3.14, )
+Expected output: MissingOperandException
+Passed !
+
+E0037 MissingOperandException
+Input: min()
+Expected output: MissingOperandException
+Passed !
+
+E0038 MissingOperandException
+Input: min(2.5)
+Expected output: MissingOperandException
+Passed !
+
+E0039 MissingOperandException
+Input: min(,1.8)
+Expected output: MissingOperandException
+Passed !
+
+E0040 MissingOperandException
+Input: max(3.14, )
+Expected output: MissingOperandException
+Passed !
+
+E0041 MissingOperandException
+Input: max(17, , 87)
+Expected output: MissingOperandException
+Passed !
+
+E0042 MissingOperandException
+Input: true?: 5
+Expected output: MissingOperandException
+Warning: exception is not an expected type (exceptions.TrinaryOperationException: Syntactic error in trinary operation.). 
+
+E0043 MissingOperandException
+Input: 2+(?4:5)
+Expected output: MissingOperandException
+Passed !
+
+E0044 MissingOperandException
+Input: 2+( )+5
+Expected output: MissingOperandException
+Passed !
+
+E0045 MissingOperatorException
+Input: (1+-2)(3-4)-5
+Expected output: MissingOperatorException
+Passed !
+
+E0046 MissingOperatorException
+Input: (1+2)^(3-4) 5
+Expected output: MissingOperatorException
+Passed !
+
+E0047 MissingOperatorException
+Input: cos(0.5)12.3E+4
+Expected output: MissingOperatorException
+Passed !
+
+E0048 MissingRightParenthesisException
+Input: ((2+3)^((3-1)+1)
+Expected output: MissingRightParenthesisException
+Passed !
+
+E0049 TrinaryOperationException
+Input: false?9:true?1:3:5
+Expected output: TrinaryOperationException
+Passed !
+
+E0050 TrinaryOperationException
+Input: 6?7:7:9
+Expected output: TypeMismatchedException
+Passed !
+
+E0051 TrinaryOperationException
+Input: 5?(8:8)
+Expected output: TrinaryOperationException
+Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+
+E0052 TypeMismatchedException
+Input: (13 < 2 * 5) + 12
+Expected output: TypeMismatchedException
+Passed !
+
+E0053 TypeMismatchedException
+Input: 12?34:56
+Expected output: TypeMismatchedException
+Passed !
+
+E0054 TypeMismatchedException
+Input: true?42.5>5*8:15
+Expected output: TypeMismatchedException
+Passed !
+
+E0055 TypeMismatchedException
+Input: 4^(32.5>65)
+Expected output: TypeMismatchedException
+Passed !
+
+E0056 TypeMismatchedException
+Input: sin(32.5>65)
+Expected output: TypeMismatchedException
+Passed !
+
+E0057 TypeMismatchedException
+Input: 32.5|65
+Expected output: TypeMismatchedException
+Passed !
+
+E0058 TypeMismatchedException
+Input: true+5
+Expected output: TypeMismatchedException
+Passed !
+
+E0059 TypeMismatchedException
+Input: 5&76
+Expected output: TypeMismatchedException
+Passed !
+
+E0060 TypeMismatchedException
+Input: max(54, true)
+Expected output: TypeMismatchedException
+Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
+
+E0061 IllegalSymbolException
+Input: (5 @ 4) ? 7 : 8
+Expected output: IllegalSymbolException
+Passed !
+
+E0062 Not a predefined identifier.
+Input: 4 + mix(5, 2) + 1
+Expected output: IllegalIdentifierException
+Passed !
+
+E0063 MissingOperatorException 
+Input: cos(0.5)12.3E+4
+Expected output: MissingOperatorException
+Passed !
+
+E0064 TrinaryOperationException 
+Input: false ? 9 : true ? 1 : 3 : 5
+Expected output: TrinaryOperationException
+Passed !
+
+E0065 TypeMismatchedException 
+Input: true ? 42.5 > 5 * 8 : 15
+Expected output: TypeMismatchedException
+Passed !
+
+E0066 Left parenthesis expected.
+Input: (2 + 3) ^ 3) - ((1 + 1)
+Expected output: MissingLeftParenthesisException
+Passed !
+
+E0067 Right parenthesis expected.
+Input: ((2 + 3) ^ ((3 - 1) + 1)
+Expected output: MissingRightParenthesisException
+Passed !
+
+E0068 Operator expected.
+Input: (1 + 2) ^ (3 - 4)  5
+Expected output: MissingOperatorException
+Passed !
+
+E0069 Operand expected.
+Input: (1 + 2) ^ (3 - ) + 5
+Expected output: MissingOperandException
+Passed !
+
+E0070 Divided by 0.
+Input: 4 / (12 - 3 * 4) + 1
+Expected output: DividedByZeroException
+Passed !
+
+E0071 Left parenthesis expected.
+Input: (2 + 3) ^ 3) - ((1 + 1)
+Expected output: MissingLeftParenthesisException
+Passed !
+
+E0072 Right parenthesis expected.
+Input: ((2 + 3) ^ ((3 - 1) + 1)
+Expected output: MissingRightParenthesisException
+Passed !
+
+E0073 Operator expected.
+Input: (1 + 2) ^ (3 - 4)  5
+Expected output: MissingOperatorException
+Passed !
+
+E0074 Operand expected.
+Input: (1 + 2) ^ (3 - ) + 5
+Expected output: MissingOperandException
+Passed !
+
+E0075 Divided by 0.
+Input: 4 / (12 - 3 * 4) + 1
+Expected output: DividedByZeroException
+Passed !
+
+E0076 Type mismatched.
+Input: (13 < 2 * 5) + 12
+Expected output: TypeMismatchedException
+Passed !
+
+E0077 Scientific Notation Error.
+Input: 4 + 10.E+5 + 1
+Expected output: IllegalDecimalException
+Passed !
+
+E0078 Not a predefined identifier.
+Input: 4 + mix(5, 2) + 1
+Expected output: IllegalIdentifierException
+Passed !
+
+E0079 Function call error.
+Input: sin(2, 1)
+Expected output: FunctionCallException
+Passed !
+
+E0080 Function call error.
+Input: min(2.5)
+Expected output: MissingOperandException
+Passed !
+
+E0081 IllegalDecimalException
+Input: 12.3Emax(4, 5, 6)
+Expected output: IllegalDecimalException
+Passed !
+
+E0082 IllegalDecimalException
+Input: min(4., 7)
+Expected output: IllegalDecimalException
+Passed !
+
+E0083 IllegalDecimalException
+Input: 4+10.E+5+1
+Expected output: IllegalDecimalException
+Passed !
+
+E0084 Operand expected.
+Input: (1 + 2) ^ (3 - ) + 5
+Expected output: MissingOperandException
+Passed !
+
+E0085 IllegalIdentifierException
+Input: 4+mix(5,2)+1
+Expected output: IllegalIdentifierException
+Passed !
+
+E0086 Type mismatched.
+Input: (13 < 2 * 5) + 12
+Expected output: TypeMismatchedException
+Passed !
+
+E0087 IllegalSymbolException
+Input: (5 @ 4) ? 7 : 8
+Expected output: IllegalSymbolException
+Passed !
+
+E0088 Not a predefined identifier.
+Input: 4 + mix(5, 2) + 1
+Expected output: IllegalIdentifierException
+Passed !
+
+E0089 MissingOperatorException 
+Input: cos(0.5)12.3E+4
+Expected output: MissingOperatorException
+Passed !
+
+E0090 TrinaryOperationException 
+Input: false ? 9 : true ? 1 : 3 : 5
+Expected output: TrinaryOperationException
+Passed !
+
+E0091 TypeMismatchedException 
+Input: true ? 42.5 > 5 * 8 : 15
+Expected output: TypeMismatchedException
+Passed !
+
+E0092 Empty Expression
+Input:  
+Expected output: EmptyExpressionException
+Passed !
+
+E0093 Empty Expression
+Input:         
+Expected output: EmptyExpressionException
+Passed !
+
+E0094 Type Miss Match
+Input: true-2
+Expected output: TypeMismatchedException
+Passed !
+
+E0095 Miss Operand
+Input: |
+Expected output: MissingOperandException
+Passed !
+
+E0096 Error in ?:
+Input: :
+Expected output: TrinaryOperationException
+Error: unable to detect errors in an incorrect input (output = 0). 
+
+E0097 Miss Operand
+Input: ?:
+Expected output: MissingOperandException
+Warning: exception is not an expected type (exceptions.TrinaryOperationException: Syntactic error in trinary operation.). 
+
+E0098 Function call error.
+Input: sin0.23)
+Expected output: FunctionCallException
+Passed !
+
+E0099 Right parenthesis expected.
+Input: (( --- 1)
+Expected output: MissingRightParenthesisException
+Passed !
+
+E0100 Operator expected.
+Input: 123(456)
+Expected output: MissingOperatorException
+Passed !
+
+E0101 Operand expected.
+Input: sin()
+Expected output: MissingOperandException
+Passed !
+
+E0102 Scientific Notation Error.
+Input: 1234e
+Expected output: IllegalDecimalException
+Passed !
+
+E0103 Scientific Notation Error.
+Input: 1.1E+1.1
+Expected output: IllegalDecimalException
+Passed !
+
+E0104 Scientific Notation Error.
+Input: .1e+1
+Expected output: IllegalDecimalException
+Passed !
+
+E0105 Not a predefined identifier.
+Input: sos(111)
+Expected output: IllegalIdentifierException
+Passed !
+
+E0106 Function call error.
+Input: sin(cos(sin(1.31, 3.214)))
+Expected output: FunctionCallException
+Passed !
+
+E0107 Function call error.
+Input: max(1232.5135123235)
+Expected output: MissingOperandException
+Passed !
+
+E0108 Left parenthesis expected.
+Input: ((-1e1)))
+Expected output: MissingLeftParenthesisException
+Passed !
+
+E0109 Right parenthesis expected.
+Input: (((1145.14))
+Expected output: MissingRightParenthesisException
+Passed !
+
+E0110 Operator expected.
+Input: ---1 (2)
+Expected output: MissingOperatorException
+Passed !
+
+E0111 Operand expected.
+Input: 123^
+Expected output: MissingOperandException
+Passed !
+
+E0112 Divided by 0.
+Input: 1 / sin(0)
+Expected output: DividedByZeroException
+Passed !
+
+E0113 Operand expected.
+Input: max(1,1,4,5,1,4,)
+Expected output: MissingOperandException
+Passed !
+
+E0114 LexicalException.
+Input: ((5 @ 4) ? 7 : 8
+Expected output: IllegalSymbolException
+Passed !
+
+E0115 Right parenthesis expected.
+Input: ((12 12
+Expected output: MissingOperatorException
+Passed !
+
+E0116 Operator expected.
+Input: (1 + 2) ^ (3 - 4)  5
+Expected output: MissingOperatorException
+Passed !
+
+E0117 Operand expected.
+Input: (1 + 2) ^ (3 - ) + 5
+Expected output: MissingOperandException
+Passed !
+
+E0118 Divided by 0.
+Input: 4 / (12 - 3 * 4) + 1
+Expected output: DividedByZeroException
+Passed !
+
+E0119 Type mismatched.
+Input: (13 < 2 * 5) + 12
+Expected output: TypeMismatchedException
+Passed !
+
+E0120 Scientific Notation Error.
+Input: 4 + 10.E+5 + 1
+Expected output: IllegalDecimalException
+Passed !
+
+E0121 Not a predefined identifier.
+Input: 4 + mix(5, 2) + 1
+Expected output: IllegalIdentifierException
+Passed !
+
+E0122 Function call error.
+Input: sin(2, 1)
+Expected output: FunctionCallException
+Passed !
+
+E0123 Function call error.
+Input: min(2.5)
+Expected output: MissingOperandException
+Passed !
+
+E0124 SyntacticException.
+Input: 3.14 * 2 >= 2.5 * 3 ? (6 : 7) + 8
+Expected output: TrinaryOperationException
+Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+
+E0125 SyntacticException.
+Input: (2 + 3) ^ 3) - ((1 + 1)
+Expected output: MissingLeftParenthesisException
+Passed !
+
+E0126 SyntacticException.
+Input: ((2 + 3) ^ ((3 - 1) + 1)
+Expected output: MissingRightParenthesisException
+Passed !
+
+C1001 Expression with arithmetic operations.
+Input: 65 / 5 - 130e-1
+Expected output: 0.0
+Passed !
+
+C1002 Expression with relational and logical operations.
+Input: (5 > 3) & (4 < 8) ? 15 : 16
+Expected output: 15
+Passed !
+
+C1003 Predefined functions.
+Input: max(sin(0.15), cos(0.15), sin(cos(0.15)))
+Expected output: 0.98877
+Passed !
+
+C1004 Predefined functions.
+Input: sin(min(12, 3 * 5, 2 + 3 ^ 2, 3.14E2))
+Expected output: -0.99999
+Passed !
+
+C1005 A simple expression.
+Input: 1>2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1006 A simple expression.
+Input: 1>=2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1007 A simple expression.
+Input: 1=2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1008 A simple expression.
+Input: 1< 2 ?3:4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1009 A simple expression.
+Input: 1<=2 ? 3 : 4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1010 A simple expression.
+Input: 1<>2 ? 3 : 4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1011 Expression with arithmetic operations.
+Input: 2.25E+2 - (55.5 + 4 * (10 / 2) ^ 2)
+Expected output: 69.5
+Passed !
+
+C1012 Expression with arithmetic operations.
+Input:  (60 + 2 *( (12 / 4) ^ 2))+1.22E+2
+Expected output: 200
+Passed !
+
+C1013 select
+Input: true?true?123:false?23:43:5
+Expected output: 123
+Passed !
+
+C1014 Expression with relational and logical operations.
+Input: 1>2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1015 Expression with relational and logical operations.
+Input: 1>=2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1016 Expression with relational and logical operations.
+Input: 1=2 ? 3 : 4
+Expected output: 4
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1017 Expression with relational and logical operations.
+Input: 1< 2 ?3:4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1018 Expression with relational and logical operations.
+Input: 1<=2 ? 3 : 4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1019 Expression with relational and logical operations.
+Input: 1<>2 ? 3 : 4
+Expected output: 3
+Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+
+C1020 Expression with arithmetic operations.
+Input: 2.25E+2 - (55.5 + -4 * (10 / 2) ^ 2)
+Expected output: 269.5
+Passed !
+
+C1021 A simple expression.
+Input: -99 ---3 * 2
+Expected output: -105
+Passed !
+
+C1022 Expression with arithmetic operations.
+Input: 51.3E+2 - (123 ^2)
+Expected output: -9999
+Passed !
+
+C1023 Expression with arithmetic operations.
+Input: 673 / 54 - 273e-10
+Expected output: 12.463
+Passed !
+
+C1024 A simple expression.
+Input: 1292313 ---32142 * 2124
+Expected output: -66977295
+Passed !
+
+C1025 Expression with arithmetic operations.
+Input: 1.23214E+20 - (213152541.5 + 42144 * (31410 / 2411445) ^ 6)
+Expected output: 123213999999786840000
+Passed !
+
+C1026 Expression with arithmetic operations.
+Input: 21465 / 25.4124 - 123e-3
+Expected output: 844.5434
+Passed !
+
+C1027 Expression with relational and logical operations.
+Input: (1.111 >= 1.112) ? 312 : 125
+Expected output: 125
+Passed !
+
+C1028 Predefined functions.
+Input: min(cos(0.45), sin(1.25), cos(sin(cos(0.15))))
+Expected output: 0.6709
+Passed !
+
+C1029 Predefined functions.
+Input: cos(cos(min(142, min(cos(0.45), sin(1.25), cos(sin(cos(0.15)))), 2 + 3 ^ 2, 4 * 3.14E2)))
+Expected output: 0.7086
+Passed !
+
+C1030 A simple expression.
+Input: 3125e-6*-8+-6*max(sin(1.2),cos(3.6),(4+2>5)?min(2,10/3-2):6)
+Expected output: -8.025
+Passed !
+
+C1031 A simple expression with min.
+Input: MIN(7e3,3.14e-0)
+Expected output: 3.14
+Error: wrong detection for a correct input (exceptions.IllegalIdentifierException: Not a predefined identifier.). 
+
+C1032 Expression with arithmetic operations.
+Input:  (60 + 2 *( (12 / 4) ^ 2))+1.22E+2
+Expected output: 200
+Passed !
+
+C1033 Expression with arithmetic operations.
+Input: 2.25E+2 - (55.5 + 4 * (10 / 2) ^ 2)
+Expected output: 69.5
+Passed !
+
+C1034 A simple expression.
+Input: 9 - 3 * 2
+Expected output: 3
+Passed !
+
+C1035 Expression with arithmetic operations.
+Input: 2.25E+2 - (55.5 + 4 * (10 / 2) ^ 2)
+Expected output: 69.5
+Passed !
+
+C1036 Expression with arithmetic operations.
+Input: 65 / 5 - 130e-1
+Expected output: 0.0
+Passed !
+
+C1037 A simple expression.
+Input: 9 - 3 * 2
+Expected output: 3
+Passed !
+
+C1038 Expression with arithmetic operations.
+Input: 2.25E+2 - (55.5 + 4 * (10 / 2) ^ 2)
+Expected output: 69.5
+Passed !
+
+E1001 IllegalSymbolException
+Input: (5 @ 4) ? 7 : 8
+Expected output: IllegalSymbolException
+Passed !
+
+E1002 Not a predefined identifier.
+Input: 4 + mix(5, 2) + 1
+Expected output: IllegalIdentifierException
+Passed !
+
+E1003 MissingOperatorException 
+Input: cos(0.5)12.3E+4
+Expected output: MissingOperatorException
+Passed !
+
+E1004 TrinaryOperationException 
+Input: false ? 9 : true ? 1 : 3 : 5
+Expected output: TrinaryOperationException
+Passed !
+
+E1005 TypeMismatchedException 
+Input: true ? 42.5 > 5 * 8 : 15
+Expected output: TypeMismatchedException
+Passed !
+
+E1006 Left parenthesis expected.
+Input: (2 + 3) ^ 3) - ((1 + 1)
+Expected output: MissingLeftParenthesisException
+Passed !
+
+E1007 Right parenthesis expected.
+Input: ((2 + 3) ^ ((3 - 1) + 1)
+Expected output: MissingRightParenthesisException
+Passed !
+
+E1008 Operator expected.
+Input: (1 + 2) ^ (3 - 4)  5
+Expected output: MissingOperatorException
+Passed !
+
+E1009 Operand expected.
+Input: (1 + 2) ^ (3 - ) + 5
+Expected output: MissingOperandException
+Passed !
+
+E1010 Divided by 0.
+Input: 4 / (12 - 3 * 4) + 1
+Expected output: DividedByZeroException
+Passed !
+
+E1011 Left parenthesis expected.
+Input: (2 + 3) ^ 3) - ((1 + 1)
+Expected output: MissingLeftParenthesisException
+Passed !
+
+E1012 Right parenthesis expected.
+Input: ((2 + 3) ^ ((3 - 1) + 1)
+Expected output: MissingRightParenthesisException
+Passed !
+
+E1013 Operator expected.
+Input: (1 + 2) ^ (3 - 4)  5
+Expected output: MissingOperatorException
+Passed !
+
+E1014 Operand expected.
+Input: (1 + 2) ^ (3 - ) + 5
+Expected output: MissingOperandException
+Passed !
+
+E1015 Divided by 0.
+Input: 4 / (12 - 3 * 4) + 1
+Expected output: DividedByZeroException
+Passed !
+
+E1016 Type mismatched.
+Input: (13 < 2 * 5) + 12
+Expected output: TypeMismatchedException
+Passed !
+
+E1017 Scientific Notation Error.
+Input: 4 + 10.E+5 + 1
+Expected output: IllegalDecimalException
+Passed !
+
+E1018 Not a predefined identifier.
+Input: 4 + mix(5, 2) + 1
+Expected output: IllegalIdentifierException
+Passed !
+
+E1019 Function call error.
+Input: sin(2, 1)
+Expected output: FunctionCallException
+Passed !
+
+E1020 Function call error.
+Input: min(2.5)
+Expected output: MissingOperandException
+Passed !
+
+E1021 IllegalDecimalException
+Input: 12.3Emax(4, 5, 6)
+Expected output: IllegalDecimalException
+Passed !
+
+E1022 IllegalDecimalException
+Input: min(4., 7)
+Expected output: IllegalDecimalException
+Passed !
+
+E1023 IllegalDecimalException
+Input: 4+10.E+5+1
+Expected output: IllegalDecimalException
+Passed !
+
+E1024 Operand expected.
+Input: (1 + 2) ^ (3 - ) + 5
+Expected output: MissingOperandException
+Passed !
+
+E1025 IllegalIdentifierException
+Input: 4+mix(5,2)+1
+Expected output: IllegalIdentifierException
+Passed !
+
+E1026 Type mismatched.
+Input: (13 < 2 * 5) + 12
+Expected output: TypeMismatchedException
+Passed !
+
+E1027 IllegalSymbolException
+Input: (5 @ 4) ? 7 : 8
+Expected output: IllegalSymbolException
+Passed !
+
+E1028 Not a predefined identifier.
+Input: 4 + mix(5, 2) + 1
+Expected output: IllegalIdentifierException
+Passed !
+
+E1029 MissingOperatorException 
+Input: cos(0.5)12.3E+4
+Expected output: MissingOperatorException
+Passed !
+
+E1030 TrinaryOperationException 
+Input: false ? 9 : true ? 1 : 3 : 5
+Expected output: TrinaryOperationException
+Passed !
+
+E1031 TypeMismatchedException 
+Input: true ? 42.5 > 5 * 8 : 15
+Expected output: TypeMismatchedException
+Passed !
+
+E1032 Empty Expression
+Input:  
+Expected output: EmptyExpressionException
+Passed !
+
+E1033 Empty Expression
+Input:         
+Expected output: EmptyExpressionException
+Passed !
+
+E1034 Type Miss Match
+Input: true-2
+Expected output: TypeMismatchedException
+Passed !
+
+E1035 Miss Operand
+Input: |
+Expected output: MissingOperandException
+Passed !
+
+E1036 Error in ?:
+Input: :
+Expected output: TrinaryOperationException
+Error: unable to detect errors in an incorrect input (output = 0). 
+
+E1037 Miss Operand
+Input: ?:
+Expected output: MissingOperandException
+Warning: exception is not an expected type (exceptions.TrinaryOperationException: Syntactic error in trinary operation.). 
+
+E1038 Function call error.
+Input: sin0.23)
+Expected output: FunctionCallException
+Passed !
+
+E1039 Right parenthesis expected.
+Input: (( --- 1)
+Expected output: MissingRightParenthesisException
+Passed !
+
+E1040 Operator expected.
+Input: 123(456)
+Expected output: MissingOperatorException
+Passed !
+
+E1041 Operand expected.
+Input: sin()
+Expected output: MissingOperandException
+Passed !
+
+E1042 Scientific Notation Error.
+Input: 1234e
+Expected output: IllegalDecimalException
+Passed !
+
+E1043 Scientific Notation Error.
+Input: 1.1E+1.1
+Expected output: IllegalDecimalException
+Passed !
+
+E1044 Scientific Notation Error.
+Input: .1e+1
+Expected output: IllegalDecimalException
+Passed !
+
+E1045 Not a predefined identifier.
+Input: sos(111)
+Expected output: IllegalIdentifierException
+Passed !
+
+E1046 Function call error.
+Input: sin(cos(sin(1.31, 3.214)))
+Expected output: FunctionCallException
+Passed !
+
+E1047 Function call error.
+Input: max(1232.5135123235)
+Expected output: MissingOperandException
+Passed !
+
+E1048 Left parenthesis expected.
+Input: ((-1e1)))
+Expected output: MissingLeftParenthesisException
+Passed !
+
+E1049 Right parenthesis expected.
+Input: (((1145.14))
+Expected output: MissingRightParenthesisException
+Passed !
+
+E1050 Operator expected.
+Input: ---1 (2)
+Expected output: MissingOperatorException
+Passed !
+
+E1051 Operand expected.
+Input: 123^
+Expected output: MissingOperandException
+Passed !
+
+E1052 Divided by 0.
+Input: 1 / sin(0)
+Expected output: DividedByZeroException
+Passed !
+
+E1053 Operand expected.
+Input: max(1,1,4,5,1,4,)
+Expected output: MissingOperandException
+Passed !
+
+E1054 LexicalException.
+Input: ((5 @ 4) ? 7 : 8
+Expected output: IllegalSymbolException
+Passed !
+
+E1055 Right parenthesis expected.
+Input: ((12 12
+Expected output: MissingOperatorException
+Passed !
+
+E1056 Operator expected.
+Input: (1 + 2) ^ (3 - 4)  5
+Expected output: MissingOperatorException
+Passed !
+
+E1057 Operand expected.
+Input: (1 + 2) ^ (3 - ) + 5
+Expected output: MissingOperandException
+Passed !
+
+E1058 Divided by 0.
+Input: 4 / (12 - 3 * 4) + 1
+Expected output: DividedByZeroException
+Passed !
+
+E1059 Type mismatched.
+Input: (13 < 2 * 5) + 12
+Expected output: TypeMismatchedException
+Passed !
+
+E1060 Scientific Notation Error.
+Input: 4 + 10.E+5 + 1
+Expected output: IllegalDecimalException
+Passed !
+
+E1061 Not a predefined identifier.
+Input: 4 + mix(5, 2) + 1
+Expected output: IllegalIdentifierException
+Passed !
+
+E1062 Function call error.
+Input: sin(2, 1)
+Expected output: FunctionCallException
+Passed !
+
+E1063 Function call error.
+Input: min(2.5)
+Expected output: MissingOperandException
+Passed !
+
+E1064 SyntacticException.
+Input: 3.14 * 2 >= 2.5 * 3 ? (6 : 7) + 8
+Expected output: TrinaryOperationException
+Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+
+E1065 SyntacticException.
+Input: (2 + 3) ^ 3) - ((1 + 1)
+Expected output: MissingLeftParenthesisException
+Passed !
+
+E1066 SyntacticException.
+Input: ((2 + 3) ^ ((3 - 1) + 1)
+Expected output: MissingRightParenthesisException
+Passed !
+
+E1067 SyntacticException.
+Input: (max5, 6, 8)
+Expected output: FunctionCallException
+Passed !
+
+E1068 IllegalDecimalException
+Input: 12.3Emax(4, 5, 6)
+Expected output: IllegalDecimalException
+Passed !
+
+E1069 IllegalDecimalException
+Input: min(4., 7)
+Expected output: IllegalDecimalException
+Passed !
+
+E1070 IllegalDecimalException
+Input: 4+10.E+5+1
+Expected output: IllegalDecimalException
+Passed !
+
+E1071 Operand expected.
+Input: (1 + 2) ^ (3 - ) + 5
+Expected output: MissingOperandException
+Passed !
+
+E1072 IllegalIdentifierException
+Input: 4+mix(5,2)+1
+Expected output: IllegalIdentifierException
+Passed !
+
+E1073 Type mismatched.
+Input: (13 < 2 * 5) + 12
+Expected output: TypeMismatchedException
+Passed !
+
+C2001 A simple expression.
+Input: 9 - 3 * 2
+Expected output: 3
+Passed !
+
+C2002 Expression with arithmetic operations.
+Input: 2.25E+2 - (55.5 + 4 * (10 / 2) ^ 2)
+Expected output: 69.5
+Passed !
+
+C2003 Expression with arithmetic operations.
+Input: 65 / 5 - 130e-1
+Expected output: 0.0
+Passed !
+
+C2004 Expression with relational and logical operations.
+Input: (5 > 3) & (4 < 8) ? 15 : 16
+Expected output: 15
+Passed !
+
+C2005 Predefined functions.
+Input: max(sin(0.15), cos(0.15), sin(cos(0.15)))
+Expected output: 0.98877
+Passed !
+
+C2006 Predefined functions.
+Input: sin(min(12, 3 * 5, 2 + 3 ^ 2, 3.14E2))
+Expected output: -0.99999
+Passed !
+
+E2001 Left parenthesis expected.
+Input: (2 + 3) ^ 3) - ((1 + 1)
+Expected output: MissingLeftParenthesisException
+Passed !
+
+E2002 Right parenthesis expected.
+Input: ((2 + 3) ^ ((3 - 1) + 1)
+Expected output: MissingRightParenthesisException
+Passed !
+
+E2003 Operator expected.
+Input: (1 + 2) ^ (3 - 4)  5
+Expected output: MissingOperatorException
+Passed !
+
+E2004 Operand expected.
+Input: (1 + 2) ^ (3 - ) + 5
+Expected output: MissingOperandException
+Passed !
+
+E2005 Divided by 0.
+Input: 4 / (12 - 3 * 4) + 1
+Expected output: DividedByZeroException
+Passed !
+
+E2006 Type mismatched.
+Input: (13 < 2 * 5) + 12
+Expected output: TypeMismatchedException
+Passed !
+
+E2007 Scientific Notation Error.
+Input: 4 + 10.E+5 + 1
+Expected output: IllegalDecimalException
+Passed !
+
+E2008 Not a predefined identifier.
+Input: 4 + mix(5, 2) + 1
+Expected output: IllegalIdentifierException
+Passed !
+
+E2009 Function call error.
+Input: sin(2, 1)
+Expected output: FunctionCallException
+Passed !
+
+E2010 Function call error.
+Input: min(2.5)
+Expected output: MissingOperandException
+Passed !
+
+E2011 Divided by 0.
+Input: 4/0
+Expected output: DividedByZeroException
+Passed !
+
+C2007 Decimal usage
+Input: 4.7
+Expected output: 4.7
+Passed !
+
+C2008 Decimal usage
+Input: 7e3
+Expected output: 7000
+Passed !
+
+C2009 A simple expression.
+Input: 7e-3
+Expected output: 0.007
+Passed !
+
+C2010 A simple expression.
+Input: 123+456
+Expected output: 579.0
+Passed !
+
+C2011 A simple expression.
+Input: -456-123
+Expected output: -579.0
+Passed !
+
+C2012 A simple expression.
+Input: 2*3+4
+Expected output: 10.0
+Passed !
+
+C2013 A simple expression.
+Input: 2*(3+4)
+Expected output: 14.0
+Passed !
+
+C2014 A simple expression.
+Input: 1/2
+Expected output: 0.5
+Passed !
+
+C2015 A simple expression.
+Input: 10/(3+2)
+Expected output: 2.0
+Passed !
+
+C2016 A simple expression.
+Input: 2^4
+Expected output: 16.0
+Passed !
+
+C2017 A simple expression.
+Input: 2*3^2
+Expected output: 18.0
+Passed !
+
+C2018 A simple expression.
+Input: 3.14*3^2
+Expected output: 28.26
+Passed !
+
+C2019 A simple expression.
+Input: 5.1+0.9
+Expected output: 6.0
+Passed !
+
+C2020 A simple expression.
+Input: 0.1+0.2
+Expected output: 0.3
+Passed !
+
+C2021 A simple expression.
+Input: 10-(-3)
+Expected output: 13.0
+Passed !
+
+C2022 A simple expression.
+Input: 2.5*4.5
+Expected output: 11.25
+Passed !
+
+C2023 A simple expression.
+Input: 5/2
+Expected output: 2.5
+Passed !
+
+C2024 A simple expression.
+Input: 1/10
+Expected output: 0.1
+Passed !
+
+C2025 A simple expression.
+Input: (3+2)/(1+2)
+Expected output: 1.6666666666666667
+Passed !
+
+C2026 A simple expression.
+Input: (2+3)*4
+Expected output: 20.0
+Passed !
+
+C2027 A simple expression.
+Input: -2^3
+Expected output: -8.0
+Passed !
+
+C2028 A simple expression.
+Input: 3*0
+Expected output: 0.0
+Passed !
+
+--------------------------------------------------------
+Statistics Report (315 test cases):
+
+	Passed case(s): 277 (87.93650793650794%)
+	Warning case(s): 10 (3.1746031746031744%)
+	Failed case(s): 28 (8.88888888888889%)
+========================================================
+
