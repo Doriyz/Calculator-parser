@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"parser","l":"Calculator"},{"p":"parser","l":"Parser"},{"p":"parser","l":"Scanner"},{"p":"parser","l":"test"},{"p":"parser","l":"test2"},{"p":"parser","l":"Token"},{"l":"所有类和接口","u":"allclasses-index.html"}];updateSearchResults();

@@ -16,6 +16,9 @@ import java.util.Vector;
  * @author zhang meixuan 
 **/
 
+// 8-arithmetic logical operator: =, >, <, <>, >=, <=
+// 10-boolean logical operator: &, |
+
 /**
  * Token class for calculator expression.
  * It can be a number, an operator(+ - * / ^), or a left/right parenthesis.
@@ -28,9 +31,9 @@ import java.util.Vector;
  * 20-variable funciton: max, min
  * 6-comma (for the parameter in function)
  * 7-boolean: true, false
- * 8-arithmetic logical operator: =, >, <, <>, >=, <=
+ * 8-arithmetic logical operator
  * 9-ternary operator: ?, :
- * 10-boolean logical operator: &, |
+ * 10-boolean logical operator
  * 21-unary logical operator: !
  * 
  * (dot,E +/- is dealed as number)
@@ -54,11 +57,22 @@ class Token {
 	public String content;
 	public int type;
 
+	/**
+	 * Constructor
+	 * @param content the input string
+	 * @param type the type of the token
+	 */
 	public Token(String content, int type) {
 		this.content = content; // the input string
 		this.type = type; // the type of the token
 	}
 
+	/**
+	 * Get the value of the token
+	 * Only number token has value, otherwise return 0.0
+	 * @return the value of the token
+	 * @throws ExpressionException
+	 */
 	public double getValue() throws ExpressionException {
 		double result = 0.0;
 		if (this.type == 1) {
@@ -76,13 +90,16 @@ class Token {
  * Scanner class for the expression.
  * It can recognize the next token in the expression string.
  */
-
 class Scanner {
 	private String expression;
 	private int pos;
 	private int length;
 	private Token nextToken;
 
+	/**
+	 * Constructor
+	 * @param expression the expression string
+	 */
 	public Scanner(String expression) {
 		this.expression = expression;
 		this.pos = 0; // next char position
@@ -90,6 +107,11 @@ class Scanner {
 		this.nextToken = null;
 	}
 
+	/**
+	 * Get the next token in the expression
+	 * @return the next token
+	 * @throws ExpressionException when the expression is illegal
+	 */
 	public Token getNextToken() throws ExpressionException {
 		if (this.nextToken != null) {
 			Token token = this.nextToken;
@@ -358,35 +380,52 @@ class Scanner {
 	}
 
 	/**
-	 * To push back a token.
-	 * This may be useful for lookahead
-	 * LR parser does not need this method.
-	 * 
-	 * @param token
+	 * To push back a token. 
+	 * This is useful when we read a token but can't use it.	
+	 * @param token the token to be pushed back
 	 */
 	public void pushBack(Token token) {
 		this.nextToken = token;
 	}
 }
 
+/**
+ * The parser class
+ */
 class Parser {
-	// use vector to store the tokens and the values
-	// actually it is a stack
+	/**
+	 * The vector to store the tokens and the values
+	 */
 	private Vector<Token> tokens = new Vector<Token>();
 	private Vector<Double> values = new Vector<Double>();
+
 	private Scanner scanner;
 
-	// for debug
 
+	/**
+	 * The vector to store the arithmetic expression list
+	 * Mention that in the whole program, we only have one arithmetic expression list at most
+	 */
 	private Vector<Double> v_ArithExprList = new Vector<Double>();
-	// only used for the arithmetic expression list
 
+	/**
+	 * Constructor
+	 * @param expression the expression to be parsed
+	 * @throws ExpressionException when the expression is illegal
+	 */
 	Parser(String expression) throws ExpressionException {
 		// create a scanner
 		expression = expression + "$";
 		this.scanner = new Scanner(expression);
 	}
 
+	/**
+	 * shift the token and check the syntax
+	 * @param token the token to be shifted
+	 * @throws ExpressionException when the expression is illegal
+	 * @throws LexicalException	when the syntax is illegal
+	 * @throws SemanticException when the semantics is illegal
+	 */
 	public void shift(Token token) throws ExpressionException, LexicalException, SemanticException{
 
 		this.values.add(token.getValue()); // add value earlierthen the token
@@ -441,8 +480,16 @@ class Parser {
 		}
 	}
 
+	/**
+	 * reduce the tokens in the given rule
+	 * @param size the size of the tokens to be reduced
+	 * @param newToken the token reduced to
+	 * @param newValue the value reduced to
+	 * @throws ExpressionException when the expression is illegal
+	 * @throws LexicalException when the syntax is illegal
+	 * @throws SemanticException when the semantics is illegal
+	 */
 	public void reduce(int size, Token newToken, Double newValue) throws ExpressionException, LexicalException, SemanticException{
-		// newToken is the token reduced to
 
 		// pop the tokens and values
 		for (int i = 0; i < size; i++) {
@@ -457,7 +504,6 @@ class Parser {
 		Token nextToken = this.scanner.getNextToken();
 		// newToken = this.scanner.getNextToken();
 		this.scanner.pushBack(nextToken);
-
 
 		if(newToken == null) return;
 		if(newToken.type == 11 && nextToken.content.equals("?")) {
@@ -478,11 +524,27 @@ class Parser {
 		}
 	}
 
-	// overload the reduce function (to use default parameter)
+	/**
+	 * overload the reduce function 
+	 * defaultly set the new value to 0.0
+	 * @param size the size of the tokens to be reduced
+	 * @param newToken the token reduced to
+	 * @throws ExpressionException when the expression is illegal
+	 * @throws LexicalException when the syntax is illegal
+	 * @throws SemanticException when the semantics is illegal
+	 */
 	public void reduce(int size, Token newToken) throws ExpressionException, LexicalException, SemanticException{
 		reduce(size, newToken, 0.0);
 	}
 
+	/**
+	 * evaluate the expression
+	 * this is the main function of the class
+	 * @return the value of the expression
+	 * @throws ExpressionException when the expression is illegal
+	 * @throws LexicalException when the syntax is illegal
+	 * @throws SemanticException when the semantics is illegal
+	 */
 	public double evaluate() throws ExpressionException, LexicalException, SemanticException{
 		
 		Token token = this.scanner.getNextToken();
@@ -496,7 +558,6 @@ class Parser {
 		if(token.content.equals("$")){
 			throw new EmptyExpressionException();
 		}
-
 
 		while (token != null) {
 			int size = this.tokens.size();
@@ -565,7 +626,6 @@ class Parser {
 					continue;
 				}
 
-
 				if(secondLastToken == null){
 					// shift
 					if(token.type == 17) break;
@@ -574,7 +634,6 @@ class Parser {
 					this.scanner.pushBack(token);
 					continue;
 				}
-
 
 				if(secondLastToken.type == 2 && secondLastToken.content.equals("-")){
 					// the unary operator -
@@ -625,7 +684,6 @@ class Parser {
 					}
 					else if(op.equals("^")) value = Math.pow(v1, v2);
 
-
 					else if(op.equals(">")) value = v1 > v2 ? 1.0 : 0.0;
 					else if(op.equals(">=")) value = v1 >= v2 ? 1.0 : 0.0;
 					else if(op.equals("<")) value = v1 < v2 ? 1.0 : 0.0;
@@ -649,10 +707,10 @@ class Parser {
 					}
 				}
 			}
+
 			// if the last token is a right parenthesis
 			else if(lastToken.type == 4) {
 				if(sixthLastToken != null){
-
 					// check Function Call: sin(E, L)
 					if(sixthLastToken.type == 5 && fifthLastToken.type == 3 && fourthLastToken.type == 11 && thirdLastToken.type == 6 && secondLastToken.type == 16){
 						throw new FunctionCallException(null);
@@ -667,9 +725,7 @@ class Parser {
 
 						if(sixthLastToken.content.equals("max")) value = Collections.max(v);
 						else value = Collections.min(v);
-
 						this.reduce(6, new Token("", 11), value);
-
 						this.v_ArithExprList.clear();
 						continue;
 					}
@@ -679,12 +735,10 @@ class Parser {
 					if(fourthLastToken.type == 5 && thirdLastToken.type == 3 && secondLastToken.type == 11){
 						double value = 0.0;
 						double v = this.values.get(size - 2);
-
 						if(fourthLastToken.content.equals("sin")) {
 							value = Math.sin(v);
 						}
 						else value = Math.cos(v);
-
 						this.reduce(4, new Token("", 11), value);
 						continue;
 					}
@@ -702,6 +756,7 @@ class Parser {
 					}
 				}
 			} 
+
 			// if the last token is a ArithExprList
 			else if(lastToken.type == 16){
 				if(fifthLastToken != null && fifthLastToken.type == 11 && fourthLastToken.type == 6 && thirdLastToken.type == 11 && secondLastToken.type == 6){
@@ -712,6 +767,7 @@ class Parser {
 					continue;
 				}
 			}
+
 			// if the last token is a boolean expression
 			else if(lastToken.type == 12){
 				// check for reduce: BooleanExpr -> BooleanExpr op BooleanExpr
@@ -768,6 +824,9 @@ class Parser {
 	}
 }
 
+/**
+ * Encase the parser and scanner within a Calculator class
+ */
 public class Calculator {
 	/**
 	 * The main program of the parser. You should substitute the body of this method
@@ -779,34 +838,30 @@ public class Calculator {
 	 *                             exception will be raised.
 	 **/
 	public double calculate(String expression) throws ExpressionException {
-		// You should substitute this method body ...
 		double result = 0.0;
-
-		// 在这里进行测试实例的修改
-		// expression = "false?true?1:2:3";
-		// System.out.println("The expression is: " + expression);
-
 		Parser parser = new Parser(expression);
 		result = parser.evaluate();
-
 		return result;
 	}
 
-
-	// public static void main(String[] args) {
-	// 	// You can use the main function for testing your scanner and parser
-	// 	// The following is an example:
-	// 	Calculator calculator = new Calculator();
-	// 	String expression = "min(2.5)";
+	/** 
+	 * The main function of the calculator. You can use it for testing your scanner and parser.
+	 * @param args command line arguments.
+	 */
+	public static void main(String[] args) {
+		// You can use the main function for testing your scanner and parser
+		// The following is an example:
+		Calculator calculator = new Calculator();
+		String expression = "min(2.5)";
 	
-	// 	try {
-	// 		double result = calculator.calculate(expression);
-	// 		System.out.println("The result of " + expression + " is " + result);
-	// 	} catch (ExpressionException e) {
-	// 		System.out.println("Throw the error!!!");
-	// 		System.out.println(e.getClass());
-	// 		System.out.println(e.getMessage());
-	// 	}
-	// }
+		try {
+			double result = calculator.calculate(expression);
+			System.out.println("The result of " + expression + " is " + result);
+		} catch (ExpressionException e) {
+			System.out.println("Throw the error!!!");
+			System.out.println(e.getClass());
+			System.out.println(e.getMessage());
+		}
+	}
 
 }
