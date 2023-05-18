@@ -47,6 +47,7 @@ import java.util.Vector;
  * 14-Unary Function        // actually, we transform it into ArithExpr once generated
  * 15-Variable Function		// actually, we transform it into ArithExpr once generated
  * 16-Arithmetic Expression List
+ * 17-$ end symbol
  * (single number is considered as decimal)
  */
 class Token {
@@ -345,6 +346,12 @@ class Scanner {
 			return new Token("" + ch, 21);
 		}
 
+		// type 17: end of expression
+		else if (ch == '$') {
+			this.pos++;
+			return new Token("" + ch, 17);
+		}
+
 		else {
 			throw new IllegalSymbolException();
 		}
@@ -368,15 +375,16 @@ class Parser {
 	private Vector<Token> tokens = new Vector<Token>();
 	private Vector<Double> values = new Vector<Double>();
 	private Scanner scanner;
-	private Token nextToken;
+
+	// for debug
 
 	private Vector<Double> v_ArithExprList = new Vector<Double>();
 	// only used for the arithmetic expression list
 
 	Parser(String expression) throws ExpressionException {
 		// create a scanner
+		expression = expression + "$";
 		this.scanner = new Scanner(expression);
-		this.nextToken = this.scanner.getNextToken();
 	}
 
 	public void shift(Token token) throws ExpressionException {
@@ -407,7 +415,8 @@ class Parser {
 
 
 	public double evaluate() throws ExpressionException, LexicalException, SemanticException{
-		Token token = this.nextToken;
+		Token token = this.scanner.getNextToken();
+		this.scanner.pushBack(token);
 		if(token == null){
 			throw new EmptyExpressionException();
 		}
@@ -416,11 +425,7 @@ class Parser {
 	
 
 		while (token != null) {
-			// if not reduce in this loop, the token will be shifted
-			this.scanner.pushBack(token);
-
 			int size = this.tokens.size();
-			
 			/////////////////////////  not sure when to check
 			// after reducing, check whether the MissingOperatorException
 			// after shifting, check whether the MissingOperandException
@@ -428,6 +433,7 @@ class Parser {
 			if(size == 0){
 				// shift
 				token = this.scanner.getNextToken();
+				if(token.type == 17) break;
 				this.shift(token);
 				continue;
 
@@ -468,10 +474,6 @@ class Parser {
 				sixthLastToken = this.tokens.get(size - 6);
 			}
 
-			// return 0.0;
-
-			// if(true) return 0.0;
-
 			// if the last token is a digit
 			if(lastToken.type == 1){
 				// reduce: ArithExpr -> Number
@@ -495,6 +497,7 @@ class Parser {
 				if(secondLastToken == null){
 					// shift
 					token = this.scanner.getNextToken();
+					if(token.type == 17) break;
 					this.shift(token);
 					continue;
 				}
@@ -532,18 +535,18 @@ class Parser {
 					double v1 = this.values.get(size - 3);
 					double v2 = this.values.get(size - 1);
 					String op = secondLastToken.content;
-					if(secondLastToken.content.equals("+")) value = v1 + v2;
-					else if(secondLastToken.content.equals("-")) value = v1 - v2;
-					else if(secondLastToken.content.equals("*")) value = v1 * v2;
-					else if(secondLastToken.content.equals("/")) value = v1 / v2;
-					else if(secondLastToken.content.equals("^")) value = Math.pow(v1, v2);
+					if(op.equals("+")) value = v1 + v2;
+					else if(op.equals("-")) value = v1 - v2;
+					else if(op.equals("*")) value = v1 * v2;
+					else if(op.equals("/")) value = v1 / v2;
+					else if(op.equals("^")) value = Math.pow(v1, v2);
 
-					else if(secondLastToken.content.equals(">")) value = v1 > v2 ? 1.0 : 0.0;
-					else if(secondLastToken.content.equals(">=")) value = v1 >= v2 ? 1.0 : 0.0;
-					else if(secondLastToken.content.equals("<")) value = v1 < v2 ? 1.0 : 0.0;
-					else if(secondLastToken.content.equals("<=")) value = v1 <= v2 ? 1.0 : 0.0;
-					else if(secondLastToken.content.equals("=")) value = v1 == v2 ? 1.0 : 0.0;
-					else if(secondLastToken.content.equals("<>")) value = v1 != v2 ? 1.0 : 0.0;
+					else if(op.equals(">")) value = v1 > v2 ? 1.0 : 0.0;
+					else if(op.equals(">=")) value = v1 >= v2 ? 1.0 : 0.0;
+					else if(op.equals("<")) value = v1 < v2 ? 1.0 : 0.0;
+					else if(op.equals("<=")) value = v1 <= v2 ? 1.0 : 0.0;
+					else if(op.equals("=")) value = v1 == v2 ? 1.0 : 0.0;
+					else if(op.equals("<>")) value = v1 != v2 ? 1.0 : 0.0;
 
 					if(secondLastToken.type == 2) this.reduce(3, new Token("", 11), value);
 					else if(secondLastToken.type == 8) this.reduce(3, new Token("", 12), value);
@@ -628,21 +631,27 @@ class Parser {
 			}
 		
 			// shift
+			if(token.type == 17) break;
 			token = this.scanner.getNextToken();
-			this.tokens.add(token);
+			this.shift(token);
+		}
+
+		
+
+
+		// get the result
+		if(this.tokens.size() == 1){
+			System.out.println("The result is: " + this.values.get(0));
+			return this.values.get(0);
 		}
 
 		// print the elements in the stack
 		System.out.println("Stack: \n");
 		for(int i = 0; i < this.tokens.size(); i++){
+			if(this.tokens.get(i) == null) continue;
 			System.out.println(this.tokens.get(i).content +" : "+ this.tokens.get(i).type + "\n");
 		}
-
-
-		// get the result
-		if(this.tokens.size()==1){
-			return this.values.get(0);
-		}
+		System.out.println("END\n");
 
 		/////////////////////////////////////////// to be continued
 		// do sth check and throw the error
@@ -663,23 +672,35 @@ public class Calculator {
 	 **/
 	public double calculate(String expression) throws ExpressionException {
 		// You should substitute this method body ...
-		double result;
+		double result = 0.0;
 
-		// //// use to test the scanner
+		// 在这里进行测试实例的修改
+		expression = "1+2";
+		System.out.println("The expression is: " + expression + "\n");
 
+		// // //// use to test the scanner
 		// System.out.println("The expression is: " + expression + "\n");
 
 		// Scanner scanner = new Scanner(expression);
 		// // loop to print the result of scanner
 		// Token token = scanner.getNextToken();
-		// while (token != null)
-		// {
-		// System.out.println(token.content + " " + token.type + ' '+ token.getValue()+ "\n");
+		// if(token != null) System.out.println(token.content + " : " + token.type + "\n");
+
+		// if(token != null) scanner.pushBack(token);
+
+		// if(token != null) System.out.println(token.content + " : " + token.type + "\n");
+
 		// token = scanner.getNextToken();
-		// }
+
+		// if(token != null) System.out.println(token.content + " : " + token.type + "\n");
+
+		// token = scanner.getNextToken();
+		// if(token != null) System.out.println(token.content + " : " + token.type + "\n");
+
 
 		Parser parser = new Parser(expression);
 		result = parser.evaluate();
+
 		return result;
 	}
 
@@ -691,7 +712,7 @@ public class Calculator {
 		String expression = "1+2+3+4+5+6+7+8+9+10";
 		try {
 			double result = calculator.calculate(expression);
-			System.out.println("The result of " + expression + " is " + result);
+			// System.out.println("The result of " + expression + " is " + result);
 		} catch (ExpressionException e) {
 			System.out.println(e.getMessage());
 		}
