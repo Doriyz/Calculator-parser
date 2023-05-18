@@ -397,15 +397,15 @@ class Parser {
 
 		// check last token
 		if(this.tokens.size() > 1){
-			Token lastToken = this.tokens.get(this.tokens.size() - 1);
+			Token lastToken = this.tokens.get(this.tokens.size() - 2);
 			if(lastToken.content.equals("(") && token.content.equals(")")){
 				throw new MissingOperandException();
 			}
 		}
 		
-
 		// check next token
 		Token nextToken = this.scanner.getNextToken();
+		nextToken = this.scanner.getNextToken();
 		this.scanner.pushBack(nextToken);
 
 		if(token.type == 2 || token.type == 3 || token.type == 6 || token.type == 8 
@@ -413,6 +413,23 @@ class Parser {
 			// the next token should be an digital, identifier, left parenthesis, unary operator, or a function
 			if(!(nextToken.type == 1 || nextToken.type == 3 || nextToken.type == 5 || nextToken.type == 20 || nextToken.type == 7 || nextToken.type == 21)){
 				throw new MissingOperandException();
+			}
+		}
+
+		// every time get a ), check if there is a ( matched
+		if(token.type == 4){
+			boolean matched = false;
+			for(int i = this.tokens.size() - 1; i >= 0; i--){
+				if(this.tokens.get(i).type == 3){
+					matched = true;
+					break;
+				}
+				else if(this.tokens.get(i).type == 4){
+					break;
+				}
+			}
+			if(matched == false){
+				throw new MissingLeftParenthesisException();
 			}
 		}
 	}
@@ -431,6 +448,7 @@ class Parser {
 
 		// check next token
 		Token nextToken = this.scanner.getNextToken();
+		newToken = this.scanner.getNextToken();
 		this.scanner.pushBack(nextToken);
 		if(newToken.type == 11 && !(nextToken.type == 2 || nextToken.type == 4 || nextToken.type == 6 || nextToken.type == 8 || nextToken.type == 9)){
 			throw new MissingOperatorException("");
@@ -791,7 +809,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = "max()";
+		String expression = "(2 + 3) ^ 3) - ((1 + 1)";
 		try {
 			double result = calculator.calculate(expression);
 			// System.out.println("The result of " + expression + " is " + result);
