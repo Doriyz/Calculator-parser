@@ -628,7 +628,10 @@ class Parser {
 					if(op.equals("+")) value = v1 + v2;
 					else if(op.equals("-")) value = v1 - v2;
 					else if(op.equals("*")) value = v1 * v2;
-					else if(op.equals("/")) value = v1 / v2;
+					else if(op.equals("/")) {
+						if(v2 == 0.0) throw new DividedByZeroException();
+						value = v1 / v2;
+					}
 					else if(op.equals("^")) value = Math.pow(v1, v2);
 
 
@@ -825,7 +828,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = "false ? 9 : true ? 1 : 3 : 5";
+		String expression = "4 / (12 - 3 * 4) + 1";
 		try {
 			double result = calculator.calculate(expression);
 			// System.out.println("The result of " + expression + " is " + result);
