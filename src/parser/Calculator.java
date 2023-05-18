@@ -10,6 +10,8 @@ import exceptions.*;
 import java.util.Collections;
 import java.util.Vector;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 /**
  * Main program of the expression based calculator ExprEval
  * 
@@ -491,10 +493,10 @@ class Parser {
 			else if(lastToken.type == 7){
 				// reduce: ArithExpr -> Boolean
 				if(lastToken.content.equals("true")){
-					this.reduce(1, new Token("", 11), 1.0);
+					this.reduce(1, new Token("", 12), 1.0);
 				}
 				else{
-					this.reduce(1, new Token("", 11), 0.0);
+					this.reduce(1, new Token("", 12), 0.0);
 				}
 				continue;
 			}
@@ -510,7 +512,6 @@ class Parser {
 					continue;
 				}
 
-	
 
 				if(secondLastToken == null){
 					// shift
@@ -564,6 +565,17 @@ class Parser {
 					if(secondLastToken.type == 2) this.reduce(3, new Token("", 11), value);
 					else if(secondLastToken.type == 8) this.reduce(3, new Token("", 12), value);
 					continue;
+				}
+
+				if(fifthLastToken != null){
+					// reduce: ArithExpr -> BooleanExpr ? ArithExpr : ArithExpr
+					if(secondLastToken.content.equals(":") && thirdLastToken.type == 11 && fourthLastToken.content.equals("?") && fifthLastToken.type == 12){
+						double value = 0.0;
+						if(this.values.get(size - 5) > 0) value = this.values.get(size - 3);
+						else value = this.values.get(size - 1);
+						this.reduce(5, new Token("", 11), value);
+						continue;
+					}
 				}
 			}
 			// if the last token is a right parenthesis
@@ -693,7 +705,7 @@ public class Calculator {
 		double result = 0.0;
 
 		// 在这里进行测试实例的修改
-		expression = "max(1,2,3)";
+		expression = "true?1:2";
 		System.out.println("The expression is: " + expression);
 
 		// // //// use to test the scanner
