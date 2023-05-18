@@ -423,7 +423,7 @@ class Parser {
 		// 每次shift 直接将当前token作为参数传入；要从scanner中取出当前移入的token;结束后要更新token
 		// 每次reduce 无需操作token
 
-		if(token == null){
+		if(token.content.equals("$")){
 			throw new EmptyExpressionException();
 		}
 
@@ -569,11 +569,8 @@ class Parser {
 					else if(op.equals("-")) value = v1 - v2;
 					else if(op.equals("*")) value = v1 * v2;
 					else if(op.equals("/")) value = v1 / v2;
-					
 					else if(op.equals("^")) value = Math.pow(v1, v2);
-					
-					
-					
+
 
 					else if(op.equals(">")) value = v1 > v2 ? 1.0 : 0.0;
 					else if(op.equals(">=")) value = v1 >= v2 ? 1.0 : 0.0;
@@ -727,7 +724,7 @@ public class Calculator {
 		double result = 0.0;
 
 		// 在这里进行测试实例的修改
-		expression = "1+2*3^2";
+		// expression = "false?true?1:2:3";
 		System.out.println("The expression is: " + expression);
 
 		// // //// use to test the scanner
@@ -766,6 +763,8 @@ public class Calculator {
 			double result = calculator.calculate(expression);
 			// System.out.println("The result of " + expression + " is " + result);
 		} catch (ExpressionException e) {
+			System.out.println("Throw the error!!!");
+			System.out.println(e.getClass());
 			System.out.println(e.getMessage());
 		}
 	}
