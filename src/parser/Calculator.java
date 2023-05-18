@@ -395,11 +395,26 @@ class Parser {
 											// because the token type will be changed
 		this.tokens.add(token);
 
+		// check last token
+		if(this.tokens.size() > 1){
+			Token lastToken = this.tokens.get(this.tokens.size() - 1);
+			if(lastToken.content.equals("(") && token.content.equals(")")){
+				throw new MissingOperandException();
+			}
+		}
+		
+
 		// check next token
 		Token nextToken = this.scanner.getNextToken();
 		this.scanner.pushBack(nextToken);
 
-		if(token.type == 2)
+		if(token.type == 2 || token.type == 3 || token.type == 6 || token.type == 8 
+			|| token.type == 8 || token.type == 10 || token.type == 21){
+			// the next token should be an digital, identifier, left parenthesis, unary operator, or a function
+			if(!(nextToken.type == 1 || nextToken.type == 3 || nextToken.type == 5 || nextToken.type == 20 || nextToken.type == 7 || nextToken.type == 21)){
+				throw new MissingOperandException();
+			}
+		}
 	}
 
 	public void reduce(int size, Token newToken, Double newValue) throws ExpressionException, LexicalException, SemanticException{
@@ -776,7 +791,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = "cos(1+2)5";
+		String expression = "max()";
 		try {
 			double result = calculator.calculate(expression);
 			// System.out.println("The result of " + expression + " is " + result);
