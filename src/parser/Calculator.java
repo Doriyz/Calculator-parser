@@ -452,7 +452,7 @@ class Parser {
 		if(token.type == 2 || token.type == 3 || token.type == 6 || token.type == 8 
 			|| token.type == 8 || token.type == 10 || token.type == 21){
 			// the next token should be an digital, identifier, left parenthesis, unary operator, or a function
-			if(!(nextToken.type == 1 || nextToken.type == 3 || nextToken.type == 5 || nextToken.type == 20 || nextToken.type == 7 || nextToken.type == 21)){
+			if(!(nextToken.content.equals("-") || nextToken.type == 1 || nextToken.type == 3 || nextToken.type == 5 || nextToken.type == 20 || nextToken.type == 7 || nextToken.type == 21)){
 				throw new MissingOperandException();
 			}
 		}
@@ -640,7 +640,7 @@ class Parser {
 					if(thirdLastToken == null){
 						// the left of - is null
 						// reduce: ArithExpr -> - ArithExpr
-						reduce(1, new Token("", 11));
+						reduce(2, new Token("", 11), -this.values.get(size - 1));
 						continue;
 					}
 
@@ -852,7 +852,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = "min(2.5)";
+		String expression = "10-(-3)";
 	
 		try {
 			double result = calculator.calculate(expression);

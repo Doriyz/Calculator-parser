@@ -1,0 +1,272 @@
+<?xml version="1.0"?>
+<!-- Standard test cases for EvalExpr -->
+<test-case-definitions>
+
+<test-case>
+	<id>C001</id>
+	<description>A simple expression.</description>
+	<input>9 - 3 * 2</input>
+	<output>3</output>
+</test-case>
+
+<test-case>
+	<id>C002</id>
+	<description>Expression with arithmetic operations.</description>
+	<input>2.25E+2 - (55.5 + 4 * (10 / 2) ^ 2)</input>
+	<output>69.5</output>
+</test-case>
+
+<test-case>
+	<id>C003</id>
+	<description>Expression with arithmetic operations.</description>
+	<input>65 / 5 - 130e-1</input>
+	<output>0.0</output>
+</test-case>
+
+<test-case>
+	<id>C004</id>
+	<description>Expression with relational and logical operations.</description>
+	<input><![CDATA[(5 > 3) & (4 < 8) ? 15 : 16]]></input>
+	<output>15</output>
+</test-case>
+
+<test-case>
+	<id>C005</id>
+	<description>Predefined functions.</description>
+	<input>max(sin(0.15), cos(0.15), sin(cos(0.15)))</input>
+	<output>0.98877</output>
+</test-case>
+
+<test-case>
+	<id>C006</id>
+	<description>Predefined functions.</description>
+	<input>sin(min(12, 3 * 5, 2 + 3 ^ 2, 3.14E2))</input>
+	<output>-0.99999</output>
+</test-case>
+
+<test-case>
+	<id>E001</id>
+	<description>Left parenthesis expected.</description>
+	<input>(2 + 3) ^ 3) - ((1 + 1)</input>
+	<exception>MissingLeftParenthesisException</exception>
+</test-case>
+
+<test-case>
+	<id>E002</id>
+	<description>Right parenthesis expected.</description>
+	<input>((2 + 3) ^ ((3 - 1) + 1)</input>
+	<exception>MissingRightParenthesisException</exception>
+</test-case>
+
+<test-case>
+	<id>E003</id>
+	<description>Operator expected.</description>
+	<input>(1 + 2) ^ (3 - 4)  5</input>
+	<exception>MissingOperatorException</exception>
+</test-case>
+
+<test-case>
+	<id>E004</id>
+	<description>Operand expected.</description>
+	<input>(1 + 2) ^ (3 - ) + 5</input>
+	<exception>MissingOperandException</exception>
+</test-case>
+
+<test-case>
+	<id>E005</id>
+	<description>Divided by 0.</description>
+	<input>4 / (12 - 3 * 4) + 1</input>
+	<exception>DividedByZeroException</exception>
+</test-case>
+
+<test-case>
+	<id>E006</id>
+	<description>Type mismatched.</description>
+	<input><![CDATA[(13 < 2 * 5) + 12]]></input>
+	<exception>TypeMismatchedException</exception>
+</test-case>
+
+<test-case>
+	<id>E007</id>
+	<description>Scientific Notation Error.</description>
+	<input>4 + 10.E+5 + 1</input>
+	<exception>IllegalDecimalException</exception>
+</test-case>
+
+<test-case>
+	<id>E008</id>
+	<description>Not a predefined identifier.</description>
+	<input>4 + mix(5, 2) + 1</input>
+	<exception>IllegalIdentifierException</exception>
+</test-case>
+
+<test-case>
+	<id>E009</id>
+	<description>Function call error.</description>
+	<input>sin(2, 1)</input>
+	<exception>FunctionCallException</exception>
+</test-case>
+
+<test-case>
+	<id>E010</id>
+	<description>Function call error.</description>
+	<input>min(2.5)</input>
+	<exception>MissingOperandException</exception>
+</test-case>
+
+<test-case>
+	<id>E011</id>
+	<description>Divided by 0.</description>
+	<input>4/0</input>
+	<exception>DividedByZeroException</exception>
+</test-case>
+
+<!-- add test cases based on standard test -->
+
+<!-- following is error mentioned in guidance doc -->
+
+<test-case>
+	<id>C007</id>
+	<description>Decimal usage</description>
+	<input>4.7</input>
+	<output>4.7</output>
+</test-case>
+
+<test-case>
+	<id>C008</id>
+	<description>Decimal usage</description>
+	<input>7e3</input>
+	<output>7000</output>
+</test-case>
+
+<test-case>
+	<id>C009</id>
+	<description>A simple expression.</description>
+	<input>7e-3</input>
+	<output>0.007</output>
+</test-case>
+
+
+<test-case>
+	<id>C010</id>
+	<description>A simple expression.</description>
+	<input>123+456</input>
+	<output>579.0</output>
+</test-case>
+
+<test-case>
+	<id>C011</id>
+	<description>A simple expression.</description>
+	<input>-456-123</input>
+	<output>-579.0</output>
+</test-case>
+
+<test-case>
+	<id>C012</id>
+	<description>A simple expression.</description>
+	<input>2*3+4</input>
+	<output>10.0</output>
+</test-case>
+
+<test-case>
+	<id>C013</id>
+	<description>A simple expression.</description>
+	<input>2*(3+4)</input>
+	<output>14.0</output>
+</test-case>
+
+<test-case>
+	<id>C014</id>
+	<description>A simple expression.</description>
+	<input>1/2</input>
+	<output>0.5</output>
+</test-case>
+<test-case>
+	<id>C015</id>
+	<description>A simple expression.</description>
+	<input>10/(3+2)</input>
+	<output>2.0</output>
+</test-case>
+
+<test-case>
+	<id>C016</id>
+	<description>A simple expression.</description>
+	<input>2^4</input>
+	<output>16.0</output>
+</test-case>
+<test-case>
+	<id>C017</id>	
+	<description>A simple expression.</description>
+	<input>2*3^2</input>
+	<output>18.0</output>
+</test-case>
+<test-case>
+	<id>C018</id>
+	<description>A simple expression.</description>
+	<input>3.14*3^2</input>
+	<output>28.26</output>
+</test-case>
+<test-case>
+	<id>C019</id>
+	<description>A simple expression.</description>
+	<input>5.1+0.9</input>
+	<output>6.0</output>
+</test-case>
+
+<test-case>
+	<id>C020</id>
+	<description>A simple expression.</description>
+	<input>0.1+0.2</input>
+	<output>0.3</output>
+</test-case>
+<test-case>
+	<id>C021</id>
+	<description>A simple expression.</description>
+	<input>10-(-3)</input>
+	<output>13.0</output>
+</test-case>
+<test-case>
+	<id>C022</id>
+	<description>A simple expression.</description>
+	<input>2.5*4.5</input>
+	<output>11.25</output>
+</test-case>
+<test-case>
+	<id>C023</id>
+	<description>A simple expression.</description>
+	<input>5/2</input>
+	<output>2.5</output>
+</test-case>
+<test-case>
+	<id>C024</id>
+	<description>A simple expression.</description>
+	<input>1/10</input>
+	<output>0.1</output>
+</test-case>
+<test-case>
+	<id>C025</id>
+	<description>A simple expression.</description>
+	<input>(3+2)/(1+2)</input>
+	<output>1.6666666666666667</output>
+</test-case>
+
+<test-case>
+	<id>C026</id>
+	<description>A simple expression.</description>
+	<input>(2+3)*4</input>
+	<output>20.0</output>
+</test-case>
+<test-case>
+	<id>C027</id>
+	<description>A simple expression.</description>
+	<input>-2^3</input>
+	<output>-8.0</output>
+</test-case>
+<test-case>
+	<id>C028</id>
+	<description>A simple expression.</description>
+	<input>3*0</input>
+	<output>0.0</output>
+</test-case>
+
+</test-case-definitions>
