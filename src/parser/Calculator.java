@@ -470,7 +470,7 @@ class Parser {
 			throw new MissingOperatorException("");
 		}
 
-		if(newToken.type == 12 && nextToken.content.equals("?")) {
+		if(newToken.type == 12 && nextToken.content.equals(":")) {
 			throw new TypeMismatchedException();
 		}
 		if(newToken.type == 12 && !(nextToken.type == 17 || nextToken.type == 4 || nextToken.type == 10 || nextToken.type == 9)){
@@ -735,7 +735,9 @@ class Parser {
 					double value = 0.0;
 					double v1 = this.values.get(size - 3);
 					double v2 = this.values.get(size - 1);
-					if(thirdLastToken.content.equals("&")) value = v1 == 1.0 && v2 == 1.0 ? 1.0 : 0.0;
+					if(secondLastToken.content.equals("&")){
+						value = v1 == 1.0 && v2 == 1.0 ? 1.0 : 0.0;
+					}
 					else if(secondLastToken.content.equals("|")) {
 						value = v1 == 1.0 || v2 == 1.0 ? 1.0 : 0.0;
 					}
@@ -762,7 +764,6 @@ class Parser {
 
 		// get the result
 		if(this.tokens.size() == 1){
-			System.out.println("The result is: " + this.values.get(0));
 			return this.values.get(0);
 		}
 
@@ -773,6 +774,9 @@ class Parser {
 			}
 			if(this.tokens.get(i).type == 9){
 				throw new TrinaryOperationException();
+			}
+			if(this.tokens.get(i).type == 20){
+				throw new MissingOperandException();
 			}
 		}
 	
@@ -801,27 +805,7 @@ public class Calculator {
 
 		// 在这里进行测试实例的修改
 		// expression = "false?true?1:2:3";
-		System.out.println("The expression is: " + expression);
-
-		// // //// use to test the scanner
-		// System.out.println("The expression is: " + expression + "\n");
-
-		// Scanner scanner = new Scanner(expression);
-		// // loop to print the result of scanner
-		// Token token = scanner.getNextToken();
-		// if(token != null) System.out.println(token.content + " : " + token.type + "\n");
-
-		// if(token != null) scanner.pushBack(token);
-
-		// if(token != null) System.out.println(token.content + " : " + token.type + "\n");
-
-		// token = scanner.getNextToken();
-
-		// if(token != null) System.out.println(token.content + " : " + token.type + "\n");
-
-		// token = scanner.getNextToken();
-		// if(token != null) System.out.println(token.content + " : " + token.type + "\n");
-
+		// System.out.println("The expression is: " + expression);
 
 		Parser parser = new Parser(expression);
 		result = parser.evaluate();
@@ -830,19 +814,20 @@ public class Calculator {
 	}
 
 
-	public static void main(String[] args) {
-		// You can use the main function for testing your scanner and parser
-		// The following is an example:
-		Calculator calculator = new Calculator();
-		String expression = "2.5 | 65";
-		try {
-			double result = calculator.calculate(expression);
-			// System.out.println("The result of " + expression + " is " + result);
-		} catch (ExpressionException e) {
-			System.out.println("Throw the error!!!");
-			System.out.println(e.getClass());
-			System.out.println(e.getMessage());
-		}
-	}
+	// public static void main(String[] args) {
+	// 	// You can use the main function for testing your scanner and parser
+	// 	// The following is an example:
+	// 	Calculator calculator = new Calculator();
+	// 	String expression = "(5 > 3) & (4 < 8) ? 15 : 16";
+	// 	//  min(2.5)
+	// 	try {
+	// 		double result = calculator.calculate(expression);
+	// 		System.out.println("The result of " + expression + " is " + result);
+	// 	} catch (ExpressionException e) {
+	// 		System.out.println("Throw the error!!!");
+	// 		System.out.println(e.getClass());
+	// 		System.out.println(e.getMessage());
+	// 	}
+	// }
 
 }
