@@ -415,11 +415,18 @@ class Parser {
 	public double evaluate() throws ExpressionException, LexicalException, SemanticException{
 		Token token = this.scanner.getNextToken();
 		this.scanner.pushBack(token);
+
+		// token 表示下一次lookahead拿到的token内容
+		// 每一次更新token 都要进行一个get和一次pushBack
+		// 每次shift 直接将当前token作为参数传入；要从scanner中取出当前移入的token;结束后要更新token
+		// 每次reduce 无需操作token
+
 		if(token == null){
 			throw new EmptyExpressionException();
 		}
 
 		System.out.println("Start to loop");
+
 
 		while (token != null) {
 			int size = this.tokens.size();
@@ -428,10 +435,12 @@ class Parser {
 			// after shifting, check whether the MissingOperandException
 
 			if(size == 0){
-				// shift
-				token = this.scanner.getNextToken();
+				// shift	
 				if(token.type == 17) break;
 				this.shift(token);
+				token = this.scanner.getNextToken();
+				token = this.scanner.getNextToken();
+				this.scanner.pushBack(token);
 				continue;
 
 				// // check avaible tokens: number, left parenthesis, function, boolean, unary operator
@@ -489,26 +498,32 @@ class Parser {
 				}
 				continue;
 			}
+
+		
 			// if the last token is a Arithmetic Expression
 			else if(lastToken.type == 11) {
-				if(secondLastToken == null){
-					// shift
-					token = this.scanner.getNextToken();
-					if(token.type == 17) break;
-					this.shift(token);
-					continue;
-				}
-
-
-				if(secondLastToken.content.equals(",")){
-					// the last token is a comma
+				
+				if(token.content.equals(")")){
 					// reduce: ArithExprList -> ArithExpr
 					this.v_ArithExprList.add(this.values.get(size - 1));
 					this.reduce(1, new Token("", 16));
 					continue;
 				}
+
 	
-				else if(secondLastToken.type == 2 && secondLastToken.content.equals("-")){
+
+				if(secondLastToken == null){
+					// shift
+					if(token.type == 17) break;
+					this.shift(token);
+					token = this.scanner.getNextToken();
+					token = this.scanner.getNextToken();
+					this.scanner.pushBack(token);
+					continue;
+				}
+
+
+				if(secondLastToken.type == 2 && secondLastToken.content.equals("-")){
 					// the unary operator -
 					if(thirdLastToken == null){
 						// the left of - is null
@@ -559,9 +574,9 @@ class Parser {
 						// reduce: max(ArithExpr, ArithExprList)
 						double value = 0.0;
 						Vector<Double> v = this.v_ArithExprList;  // number in list
-						v.add(this.values.get(size - 5));  // number of ArithExpr
+						v.add(this.values.get(size - 4));  // number of ArithExpr
 
-						if(sixthLastToken.content == "max") value = Collections.max(v);
+						if(sixthLastToken.content.equals("max")) value = Collections.max(v);
 						else value = Collections.min(v);
 
 						this.reduce(6, new Token("", 11), value);
@@ -575,7 +590,7 @@ class Parser {
 					if(fourthLastToken.type == 5 && thirdLastToken.type == 3 && secondLastToken.type == 11){
 						double value = 0.0;
 						double v = this.values.get(size - 2);
-						
+
 						if(fourthLastToken.content.equals("sin")) {
 							value = Math.sin(v);
 						}
@@ -603,9 +618,8 @@ class Parser {
 				if(fifthLastToken != null && fifthLastToken.type == 11 && fourthLastToken.type == 6 && thirdLastToken.type == 11 && secondLastToken.type == 6){
 					// if satify " ArithExpr, ArithExpr, ArithExprList "  
 					// reduce: ArithExprList -> ArithExpr, ArithExprList
-					this.reduce(5, new Token("", 16));
-
 					this.v_ArithExprList.add(this.values.get(size - 3));
+					this.reduce(3, new Token("", 16));
 					continue;
 				}
 			}
@@ -633,8 +647,11 @@ class Parser {
 		
 			// shift
 			if(token.type == 17) break;
-			token = this.scanner.getNextToken();
 			this.shift(token);
+			token = this.scanner.getNextToken();
+			token = this.scanner.getNextToken();
+			this.scanner.pushBack(token);
+			
 		}
 
 		
@@ -676,7 +693,7 @@ public class Calculator {
 		double result = 0.0;
 
 		// 在这里进行测试实例的修改
-		expression = "sin(1)";
+		expression = "max(1,2,3)";
 		System.out.println("The expression is: " + expression);
 
 		// // //// use to test the scanner
