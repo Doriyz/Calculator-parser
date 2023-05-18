@@ -536,7 +536,7 @@ class Parser {
 					if(thirdLastToken.type == 2 || thirdLastToken.type == 3|| thirdLastToken.type == 6|| thirdLastToken.type == 8){
 						// the left of - is an operator
 						// reduce: ArithExpr -> - ArithExpr
-						reduce(1, new Token("", 11), -this.values.get(size - 1));
+						reduce(2, new Token("", 11), -this.values.get(size - 1));
 						continue;
 					}
 				}
@@ -707,7 +707,7 @@ public class Calculator {
 		double result = 0.0;
 
 		// 在这里进行测试实例的修改
-		expression = "1<>2 | 1>3 ?3:4";
+		expression = "1+-2";
 		System.out.println("The expression is: " + expression);
 
 		// // //// use to test the scanner
