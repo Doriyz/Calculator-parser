@@ -462,10 +462,10 @@ class Parser {
 
 
 		if(newToken == null) return;
-		if(newToken.type == 11 && !(nextToken.type == 2 || nextToken.type == 4 || nextToken.type == 6 || nextToken.type == 8 || nextToken.type == 9)){
+		if(newToken.type == 11 && !(nextToken.type == 17 || nextToken.type == 2 || nextToken.type == 4 || nextToken.type == 6 || nextToken.type == 8 || nextToken.type == 9)){
 			throw new MissingOperatorException("");
 		}
-		if(newToken.type == 12 && !(nextToken.type == 4 || nextToken.type == 10 || nextToken.type == 9)){
+		if(newToken.type == 12 && !(nextToken.type == 17 || nextToken.type == 4 || nextToken.type == 10 || nextToken.type == 9)){
 			// type=9 may be dealt with trinary operator usage 
 			throw new MissingOperatorException("");
 		}
@@ -761,6 +761,9 @@ class Parser {
 			if(this.tokens.get(i).type == 3){
 				throw new MissingRightParenthesisException();
 			}
+			if(this.tokens.get(i).type == 9){
+				throw new TrinaryOperationException();
+			}
 		}
 	
 		
@@ -822,7 +825,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = "sin(1,2)";
+		String expression = "false ? 9 : true ? 1 : 3 : 5";
 		try {
 			double result = calculator.calculate(expression);
 			// System.out.println("The result of " + expression + " is " + result);
