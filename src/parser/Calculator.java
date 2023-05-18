@@ -408,6 +408,10 @@ class Parser {
 		nextToken = this.scanner.getNextToken(); // get the next token
 		this.scanner.pushBack(nextToken); // put back the next token
 
+		// next token would not be null
+		// because the expression is ended with $
+
+		// check if the token is a operator or ( or , 
 		if(token.type == 2 || token.type == 3 || token.type == 6 || token.type == 8 
 			|| token.type == 8 || token.type == 10 || token.type == 21){
 			// the next token should be an digital, identifier, left parenthesis, unary operator, or a function
@@ -419,7 +423,7 @@ class Parser {
 		// every time get a ), check if there is a ( matched
 		if(token.type == 4){
 			boolean matched = false;
-			for(int i = this.tokens.size() - 1; i >= 0; i--){
+			for(int i = this.tokens.size() - 2; i >= 0; i--){
 				if(this.tokens.get(i).type == 3){
 					matched = true;
 					break;
@@ -431,6 +435,11 @@ class Parser {
 			if(matched == false){
 				throw new MissingLeftParenthesisException();
 			}
+		}
+
+		// every time get a function name, next token should be a left parenthesis
+		if(token.type == 5 || token.type == 20){
+			if(nextToken.type != 3) throw new FunctionCallException(null);
 		}
 	}
 
@@ -448,8 +457,10 @@ class Parser {
 
 		// check next token
 		Token nextToken = this.scanner.getNextToken();
-		newToken = this.scanner.getNextToken();
+		// newToken = this.scanner.getNextToken();
 		this.scanner.pushBack(nextToken);
+
+
 		if(newToken == null) return;
 		if(newToken.type == 11 && !(nextToken.type == 2 || nextToken.type == 4 || nextToken.type == 6 || nextToken.type == 8 || nextToken.type == 9)){
 			throw new MissingOperatorException("");
@@ -647,6 +658,12 @@ class Parser {
 			// if the last token is a right parenthesis
 			else if(lastToken.type == 4) {
 				if(sixthLastToken != null){
+
+					// check Function Call: sin(E, L)
+					if(sixthLastToken.type == 5 && fifthLastToken.type == 3 && fourthLastToken.type == 11 && thirdLastToken.type == 6 && secondLastToken.type == 16){
+						throw new FunctionCallException(null);
+					}
+
 					// check for reduce: max(ArithExpr, ArithExprList)
 					if(sixthLastToken.type == 20 && fifthLastToken.type == 3 && fourthLastToken.type == 11 && thirdLastToken.type == 6 && secondLastToken.type == 16){
 						// reduce: max(ArithExpr, ArithExprList)
@@ -805,7 +822,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = "(4";
+		String expression = "sin(1,2)";
 		try {
 			double result = calculator.calculate(expression);
 			// System.out.println("The result of " + expression + " is " + result);
