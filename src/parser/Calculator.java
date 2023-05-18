@@ -404,9 +404,9 @@ class Parser {
 		}
 		
 		// check next token
-		Token nextToken = this.scanner.getNextToken();
-		nextToken = this.scanner.getNextToken();
-		this.scanner.pushBack(nextToken);
+		Token nextToken = this.scanner.getNextToken(); // the same as token
+		nextToken = this.scanner.getNextToken(); // get the next token
+		this.scanner.pushBack(nextToken); // put back the next token
 
 		if(token.type == 2 || token.type == 3 || token.type == 6 || token.type == 8 
 			|| token.type == 8 || token.type == 10 || token.type == 21){
@@ -450,6 +450,7 @@ class Parser {
 		Token nextToken = this.scanner.getNextToken();
 		newToken = this.scanner.getNextToken();
 		this.scanner.pushBack(nextToken);
+		if(newToken == null) return;
 		if(newToken.type == 11 && !(nextToken.type == 2 || nextToken.type == 4 || nextToken.type == 6 || nextToken.type == 8 || nextToken.type == 9)){
 			throw new MissingOperatorException("");
 		}
@@ -491,7 +492,6 @@ class Parser {
 				// shift	
 				if(token.type == 17) break;
 				this.shift(token);
-				token = this.scanner.getNextToken();
 				token = this.scanner.getNextToken();
 				this.scanner.pushBack(token);
 				continue;
@@ -569,7 +569,6 @@ class Parser {
 					if(token.type == 17) break;
 					this.shift(token);
 					token = this.scanner.getNextToken();
-					token = this.scanner.getNextToken();
 					this.scanner.pushBack(token);
 					continue;
 				}
@@ -610,7 +609,6 @@ class Parser {
 						// shift
 						if(token.type == 17) break;
 						this.shift(token);
-						token = this.scanner.getNextToken();
 						token = this.scanner.getNextToken();
 						this.scanner.pushBack(token);
 						continue;
@@ -731,13 +729,9 @@ class Parser {
 			if(token.type == 17) break;
 			this.shift(token);
 			token = this.scanner.getNextToken();
-			token = this.scanner.getNextToken();
 			this.scanner.pushBack(token);
 			
 		}
-
-		
-
 
 		// get the result
 		if(this.tokens.size() == 1){
@@ -745,12 +739,14 @@ class Parser {
 			return this.values.get(0);
 		}
 
-		// print the elements in the stack
-		System.out.println("Stack: \n");
+		// check if there is left parenthesis
 		for(int i = 0; i < this.tokens.size(); i++){
-			if(this.tokens.get(i) == null) continue;
-			System.out.println(this.tokens.get(i).content +" : "+ this.tokens.get(i).type + "\n");
+			if(this.tokens.get(i).type == 3){
+				throw new MissingRightParenthesisException();
+			}
 		}
+	
+		
 		System.out.println("END\n");
 
 		/////////////////////////////////////////// to be continued
@@ -809,7 +805,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = "(2 + 3) ^ 3) - ((1 + 1)";
+		String expression = "(4";
 		try {
 			double result = calculator.calculate(expression);
 			// System.out.println("The result of " + expression + " is " + result);
