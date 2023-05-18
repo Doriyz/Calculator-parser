@@ -394,6 +394,12 @@ class Parser {
 		this.values.add(token.getValue()); // add value earlierthen the token
 											// because the token type will be changed
 		this.tokens.add(token);
+
+		// check next token
+		Token nextToken = this.scanner.getNextToken();
+		this.scanner.pushBack(nextToken);
+
+		if(token.type == 2)
 	}
 
 	public void reduce(int size, Token newToken, Double newValue) throws ExpressionException, LexicalException, SemanticException{
@@ -412,6 +418,10 @@ class Parser {
 		Token nextToken = this.scanner.getNextToken();
 		this.scanner.pushBack(nextToken);
 		if(newToken.type == 11 && !(nextToken.type == 2 || nextToken.type == 4 || nextToken.type == 6 || nextToken.type == 8 || nextToken.type == 9)){
+			throw new MissingOperatorException("");
+		}
+		if(newToken.type == 12 && !(nextToken.type == 4 || nextToken.type == 10 || nextToken.type == 9)){
+			// type=9 may be dealt with trinary operator usage 
 			throw new MissingOperatorException("");
 		}
 	}
