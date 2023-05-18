@@ -389,14 +389,14 @@ class Parser {
 		this.scanner = new Scanner(expression);
 	}
 
-	public void shift(Token token) throws ExpressionException {
+	public void shift(Token token) throws ExpressionException, LexicalException, SemanticException{
 
 		this.values.add(token.getValue()); // add value earlierthen the token
 											// because the token type will be changed
 		this.tokens.add(token);
 	}
 
-	public void reduce(int size, Token newToken, Double newValue) {
+	public void reduce(int size, Token newToken, Double newValue) throws ExpressionException, LexicalException, SemanticException{
 		// newToken is the token reduced to
 
 		// pop the tokens and values
@@ -407,14 +407,22 @@ class Parser {
 		// push the token and value
 		this.tokens.add(newToken);
 		this.values.add(newValue);
+
+		// check next token
+		Token nextToken = this.scanner.getNextToken();
+		this.scanner.pushBack(nextToken);
+		if(newToken.type == 11 && !(nextToken.type == 2 || nextToken.type == 4 || nextToken.type == 6 || nextToken.type == 8 || nextToken.type == 9)){
+			throw new MissingOperatorException("");
+		}
 	}
 
 	// overload the reduce function (to use default parameter)
-	public void reduce(int size, Token newToken) {
+	public void reduce(int size, Token newToken) throws ExpressionException, LexicalException, SemanticException{
 		reduce(size, newToken, 0.0);
 	}
 
 	public double evaluate() throws ExpressionException, LexicalException, SemanticException{
+		
 		Token token = this.scanner.getNextToken();
 		this.scanner.pushBack(token);
 
@@ -758,7 +766,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = "4e";
+		String expression = "cos(1+2)5";
 		try {
 			double result = calculator.calculate(expression);
 			// System.out.println("The result of " + expression + " is " + result);
