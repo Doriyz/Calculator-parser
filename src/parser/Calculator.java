@@ -505,7 +505,7 @@ class Parser {
 			// if the last token is a Arithmetic Expression
 			else if(lastToken.type == 11) {
 				
-				if(token.content.equals(")")){
+				if(token.content.equals(")") && secondLastToken != null && secondLastToken.type == 6){
 					// reduce: ArithExprList -> ArithExpr
 					this.v_ArithExprList.add(this.values.get(size - 1));
 					this.reduce(1, new Token("", 16));
@@ -707,7 +707,7 @@ public class Calculator {
 		double result = 0.0;
 
 		// 在这里进行测试实例的修改
-		expression = "1+-2";
+		expression = "(1)+2-1*5";
 		System.out.println("The expression is: " + expression);
 
 		// // //// use to test the scanner
