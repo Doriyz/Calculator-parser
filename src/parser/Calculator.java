@@ -462,10 +462,19 @@ class Parser {
 
 
 		if(newToken == null) return;
+		if(newToken.type == 11 && nextToken.content.equals("?")) {
+			throw new TypeMismatchedException();
+		}
 		if(newToken.type == 11 && !(nextToken.type == 17 || nextToken.type == 2 || nextToken.type == 4 || nextToken.type == 6 || nextToken.type == 8 || nextToken.type == 9)){
+			if(nextToken.type == 10) throw new TypeMismatchedException();
 			throw new MissingOperatorException("");
 		}
+
+		if(newToken.type == 12 && nextToken.content.equals("?")) {
+			throw new TypeMismatchedException();
+		}
 		if(newToken.type == 12 && !(nextToken.type == 17 || nextToken.type == 4 || nextToken.type == 10 || nextToken.type == 9)){
+			if(nextToken.type == 2 || nextToken.type == 6 || nextToken.type == 8) throw new TypeMismatchedException();
 			// type=9 may be dealt with trinary operator usage 
 			throw new MissingOperatorException("");
 		}
@@ -489,8 +498,6 @@ class Parser {
 		if(token.content.equals("$")){
 			throw new EmptyExpressionException();
 		}
-
-		System.out.println("Start to loop");
 
 
 		while (token != null) {
@@ -770,11 +777,10 @@ class Parser {
 		}
 	
 		
-		System.out.println("END\n");
-
+		throw new TypeMismatchedException();
 		/////////////////////////////////////////// to be continued
 		// do sth check and throw the error
-		throw new MissingOperandException();
+		// throw new MissingOperandException();
 
 	}
 }
@@ -828,7 +834,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = "4 / (12 - 3 * 4) + 1";
+		String expression = "2.5 | 65";
 		try {
 			double result = calculator.calculate(expression);
 			// System.out.println("The result of " + expression + " is " + result);
