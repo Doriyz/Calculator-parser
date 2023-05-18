@@ -412,8 +412,6 @@ class Parser {
 		reduce(size, newToken, 0.0);
 	}
 
-
-
 	public double evaluate() throws ExpressionException, LexicalException, SemanticException{
 		Token token = this.scanner.getNextToken();
 		this.scanner.pushBack(token);
@@ -421,8 +419,7 @@ class Parser {
 			throw new EmptyExpressionException();
 		}
 
-		System.out.println("token: " + token.content + " type: " + token.type);
-	
+		System.out.println("Start to loop");
 
 		while (token != null) {
 			int size = this.tokens.size();
@@ -502,7 +499,8 @@ class Parser {
 					continue;
 				}
 
-				if(secondLastToken.content == ","){
+
+				if(secondLastToken.content.equals(",")){
 					// the last token is a comma
 					// reduce: ArithExprList -> ArithExpr
 					this.v_ArithExprList.add(this.values.get(size - 1));
@@ -527,7 +525,7 @@ class Parser {
 					}
 				}
 						
-				else if((secondLastToken.type == 2|| secondLastToken.type == 3|| secondLastToken.type == 8) && thirdLastToken != null && thirdLastToken.type == 11){
+				if((secondLastToken.type == 2|| secondLastToken.type == 3|| secondLastToken.type == 8) && thirdLastToken != null && thirdLastToken.type == 11){
 					// last token is an operator used for arithmetic expression
 					// like: +, -, *, /, ^,  >, >=, <, <=, =, <>
 					// reduce: ArithExpr -> ArithExpr op ArithExpr
@@ -577,7 +575,10 @@ class Parser {
 					if(fourthLastToken.type == 5 && thirdLastToken.type == 3 && secondLastToken.type == 11){
 						double value = 0.0;
 						double v = this.values.get(size - 2);
-						if(fourthLastToken.content == "sin") value = Math.sin(v);
+						
+						if(fourthLastToken.content.equals("sin")) {
+							value = Math.sin(v);
+						}
 						else value = Math.cos(v);
 
 						this.reduce(4, new Token("", 11), value);
@@ -675,8 +676,8 @@ public class Calculator {
 		double result = 0.0;
 
 		// 在这里进行测试实例的修改
-		expression = "1+2";
-		System.out.println("The expression is: " + expression + "\n");
+		expression = "sin(1)";
+		System.out.println("The expression is: " + expression);
 
 		// // //// use to test the scanner
 		// System.out.println("The expression is: " + expression + "\n");
@@ -709,7 +710,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = "1+2+3+4+5+6+7+8+9+10";
+		String expression = " ";
 		try {
 			double result = calculator.calculate(expression);
 			// System.out.println("The result of " + expression + " is " + result);
