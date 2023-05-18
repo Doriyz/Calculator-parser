@@ -180,7 +180,7 @@ class Scanner {
 							}
 							return new Token(this.expression.substring(start, this.pos), 1);
 						} else {
-							throw new ExpressionException("Unexpected Character in Scientific Notation");
+							throw new IllegalDecimalException("Unexpected Character in Scientific Notation");
 						}
 					}
 
@@ -228,7 +228,7 @@ class Scanner {
 					}
 					return new Token(this.expression.substring(start, this.pos), 1);
 				} else {
-					throw new ExpressionException("Unexpected Character in Scientific Notation");
+					throw new IllegalDecimalException("Unexpected Character in Scientific Notation");
 				}
 			}
 
@@ -758,7 +758,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = " ";
+		String expression = "4e";
 		try {
 			double result = calculator.calculate(expression);
 			// System.out.println("The result of " + expression + " is " + result);
