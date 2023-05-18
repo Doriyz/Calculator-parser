@@ -643,7 +643,9 @@ class Parser {
 					double v1 = this.values.get(size - 3);
 					double v2 = this.values.get(size - 1);
 					if(thirdLastToken.content.equals("&")) value = v1 == 1.0 && v2 == 1.0 ? 1.0 : 0.0;
-					else if(thirdLastToken.content.equals("|")) value = v1 == 1.0 || v2 == 1.0 ? 1.0 : 0.0;
+					else if(secondLastToken.content.equals("|")) {
+						value = v1 == 1.0 || v2 == 1.0 ? 1.0 : 0.0;
+					}
 					this.reduce(3, new Token("", 12), value);
 					continue;
 				}
@@ -705,7 +707,7 @@ public class Calculator {
 		double result = 0.0;
 
 		// 在这里进行测试实例的修改
-		expression = "true?1:2";
+		expression = "1<>2 | 1>3 ?3:4";
 		System.out.println("The expression is: " + expression);
 
 		// // //// use to test the scanner
