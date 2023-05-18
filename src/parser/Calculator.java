@@ -549,11 +549,31 @@ class Parser {
 					double v1 = this.values.get(size - 3);
 					double v2 = this.values.get(size - 1);
 					String op = secondLastToken.content;
+
+					String nextop = token.content;
+					// consider the right associative and priority
+					if((op.equals("^") && nextop.equals("^")) || 
+						((op.equals("*") || op.equals("/")) && nextop.equals("^")) || 
+						((op.equals("+") || op.equals("-")) && (nextop.equals("*") || nextop.equals("/") || nextop.equals("^")))
+						){
+						// shift
+						if(token.type == 17) break;
+						this.shift(token);
+						token = this.scanner.getNextToken();
+						token = this.scanner.getNextToken();
+						this.scanner.pushBack(token);
+						continue;
+					}
+
 					if(op.equals("+")) value = v1 + v2;
 					else if(op.equals("-")) value = v1 - v2;
 					else if(op.equals("*")) value = v1 * v2;
 					else if(op.equals("/")) value = v1 / v2;
+					
 					else if(op.equals("^")) value = Math.pow(v1, v2);
+					
+					
+					
 
 					else if(op.equals(">")) value = v1 > v2 ? 1.0 : 0.0;
 					else if(op.equals(">=")) value = v1 >= v2 ? 1.0 : 0.0;
@@ -707,7 +727,7 @@ public class Calculator {
 		double result = 0.0;
 
 		// 在这里进行测试实例的修改
-		expression = "(1)+2-1*5";
+		expression = "1+2*3^2";
 		System.out.println("The expression is: " + expression);
 
 		// // //// use to test the scanner
