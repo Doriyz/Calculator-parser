@@ -10,8 +10,6 @@ import exceptions.*;
 import java.util.Collections;
 import java.util.Vector;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
 /**
  * Main program of the expression based calculator ExprEval
  * 
@@ -490,10 +488,10 @@ class Parser {
 		Token token = this.scanner.getNextToken();
 		this.scanner.pushBack(token);
 
-		// token 表示下一次lookahead拿到的token内容
-		// 每一次更新token 都要进行一个get和一次pushBack
-		// 每次shift 直接将当前token作为参数传入；要从scanner中取出当前移入的token;结束后要更新token
-		// 每次reduce 无需操作token
+		// token is the next token to be processed
+		// update token include get next token and push back
+		// shift action need to get out the present token and update token to the next one
+		// reduce action do not need to update token
 
 		if(token.content.equals("$")){
 			throw new EmptyExpressionException();
@@ -502,9 +500,6 @@ class Parser {
 
 		while (token != null) {
 			int size = this.tokens.size();
-			/////////////////////////  not sure when to check
-			// after reducing, check whether the MissingOperatorException
-			// after shifting, check whether the MissingOperandException
 
 			if(size == 0){
 				// shift	
@@ -513,17 +508,6 @@ class Parser {
 				token = this.scanner.getNextToken();
 				this.scanner.pushBack(token);
 				continue;
-
-				// // check avaible tokens: number, left parenthesis, function, boolean, unary operator
-				// if(token.type == 1 || token.type == 3 || token.type == 5 || token.type == 7 || token.content.equals("-")){
-				// 	this.shift(token);
-				// 	token = scanner.getNextToken();
-				// 	continue;
-				// }
-				// else{
-				// 	// wrong start: right parenthesis, binary operator, comma, ternary operator
-				// 	throw new MissingOperandException();
-				// }
 			}
 
 			// The size is at least 1
@@ -779,13 +763,8 @@ class Parser {
 				throw new MissingOperandException();
 			}
 		}
-	
-		
+			
 		throw new TypeMismatchedException();
-		/////////////////////////////////////////// to be continued
-		// do sth check and throw the error
-		// throw new MissingOperandException();
-
 	}
 }
 
@@ -818,8 +797,8 @@ public class Calculator {
 	// 	// You can use the main function for testing your scanner and parser
 	// 	// The following is an example:
 	// 	Calculator calculator = new Calculator();
-	// 	String expression = "(5 > 3) & (4 < 8) ? 15 : 16";
-	// 	//  min(2.5)
+	// 	String expression = "min(2.5)";
+	
 	// 	try {
 	// 		double result = calculator.calculate(expression);
 	// 		System.out.println("The result of " + expression + " is " + result);
