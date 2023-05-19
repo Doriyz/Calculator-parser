@@ -48,9 +48,10 @@ public class Parser {
 											// because the token type will be changed
 		this.tokens.add(token);
 
+		Token lastToken = null;
 		// check last token
 		if(this.tokens.size() > 1){
-			Token lastToken = this.tokens.get(this.tokens.size() - 2);
+			lastToken = this.tokens.get(this.tokens.size() - 2);
 			if(lastToken.content.equals("(") && token.content.equals(")")){
 				throw new MissingOperandException();
 			}
@@ -63,6 +64,21 @@ public class Parser {
 
 		// next token would not be null
 		// because the expression is ended with $
+
+		// if the next token is ?
+		if(token.content.equals("?")){
+			if(lastToken == null || lastToken.type != 12){
+				throw new MissingOperandException();
+			}	
+		}
+
+		// if next token is &
+		if(nextToken.content.equals("$")){
+			if(token.type == 2 || token.type == 6 || token.type == 8||
+				token.type == 9 || token.type == 10 || token.type == 21){
+					throw new MissingOperandException();
+				}
+		}
 
 		// check if the token is a operator or ( or , 
 		if(token.type == 2 || token.type == 3 || token.type == 6 || token.type == 8 
@@ -121,10 +137,18 @@ public class Parser {
 		// newToken = this.scanner.getNextToken();
 		this.scanner.pushBack(nextToken);
 
-		if(newToken == null) return;
-		if(newToken.type == 11 && nextToken.content.equals("?")) {
-			throw new TypeMismatchedException();
+		Token lastToken = null;
+		// get the last token
+		if(this.tokens.size() > 1){
+			lastToken = this.tokens.get(this.tokens.size() - 2);
 		}
+		
+		// the content before ? should be checked when `?` is shifted
+		// if(newToken == null) return;
+		// if(newToken.type == 11 && nextToken.content.equals("?") && (lastToken == null || lastToken.type != 8 || lastToken.type !=2)) {
+		// 	throw new TypeMismatchedException();
+		// }
+
 		if(newToken.type == 11 && !(nextToken.type == 17 || nextToken.type == 2 || nextToken.type == 4 || nextToken.type == 6 || nextToken.type == 8 || nextToken.type == 9)){
 			if(nextToken.type == 10) throw new TypeMismatchedException();
 			throw new MissingOperatorException("");
@@ -291,6 +315,16 @@ public class Parser {
 						continue;
 					}
 
+					// the priority of boolean operator is lower than arithmetic operator
+					else if(secondLastToken.type == 8 && token.type == 2){
+						// shift
+						if(token.type == 17) break;
+						this.shift(token);
+						token = this.scanner.getNextToken();
+						this.scanner.pushBack(token);
+						continue;
+					}
+
 					if(op.equals("+")) value = v1 + v2;
 					else if(op.equals("-")) value = v1 - v2;
 					else if(op.equals("*")) value = v1 * v2;
@@ -419,7 +453,7 @@ public class Parser {
 		}
 
 		// get the result
-		if(this.tokens.size() == 1){
+		if(this.tokens.size() == 1 && this.tokens.get(0).type == 11){
 			return this.values.get(0);
 		}
 

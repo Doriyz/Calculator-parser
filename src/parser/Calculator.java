@@ -38,7 +38,7 @@ public class Calculator {
 		// You can use the main function for testing your scanner and parser
 		// The following is an example:
 		Calculator calculator = new Calculator();
-		String expression = "10-(-3)";
+		String expression = "3>2.5*1.5?9";
 	
 		try {
 			double result = calculator.calculate(expression);

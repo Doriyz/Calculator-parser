@@ -24,7 +24,7 @@ Passed !
 C0005 A simple expression with min.
 Input: MIN(7e3,3.14e-0)
 Expected output: 3.14
-Error: wrong detection for a correct input (exceptions.IllegalIdentifierException: Not a predefined identifier.). 
+Passed !
 
 C0006 Expression with arithmetic operations.
 Input:  (60 + 2 *( (12 / 4) ^ 2))+1.22E+2
@@ -94,32 +94,32 @@ Passed !
 C0019 A simple expression.
 Input: 1>2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0020 A simple expression.
 Input: 1>=2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0021 A simple expression.
 Input: 1=2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0022 A simple expression.
 Input: 1< 2 ?3:4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0023 A simple expression.
 Input: 1<=2 ? 3 : 4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0024 A simple expression.
 Input: 1<>2 ? 3 : 4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0025 Expression with arithmetic operations.
 Input:  (60 + 2 *( (12 / 4) ^ 2))+1.22E+2
@@ -134,32 +134,32 @@ Passed !
 C0027 Expression with relational and logical operations.
 Input: 1>2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0028 Expression with relational and logical operations.
 Input: 1>=2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0029 Expression with relational and logical operations.
 Input: 1=2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0030 Expression with relational and logical operations.
 Input: 1< 2 ?3:4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0031 Expression with relational and logical operations.
 Input: 1<=2 ? 3 : 4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0032 Expression with relational and logical operations.
 Input: 1<>2 ? 3 : 4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C0033 Expression with arithmetic operations.
 Input: 2.25E+2 - (55.5 + -4 * (10 / 2) ^ 2)
@@ -354,17 +354,17 @@ Passed !
 E0032 MissingOperandException
 Input: 3>2.5*1.5?9:
 Expected output: MissingOperandException
-Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 E0033 MissingOperandException
 Input: 3.14*2>=2.5*3?(6:7)+8
 Expected output: TrinaryOperationException
-Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 E0034 MissingOperandException
 Input: 7>0?7<=0?:6:5
 Expected output: MissingOperandException
-Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+Warning: exception is not an expected type (exceptions.TrinaryOperationException: Syntactic error in trinary operation.). 
 
 E0035 MissingOperandException
 Input: sin()
@@ -444,12 +444,12 @@ Passed !
 E0050 TrinaryOperationException
 Input: 6?7:7:9
 Expected output: TypeMismatchedException
-Passed !
+Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
 
 E0051 TrinaryOperationException
 Input: 5?(8:8)
 Expected output: TrinaryOperationException
-Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
 
 E0052 TypeMismatchedException
 Input: (13 < 2 * 5) + 12
@@ -459,7 +459,7 @@ Passed !
 E0053 TypeMismatchedException
 Input: 12?34:56
 Expected output: TypeMismatchedException
-Passed !
+Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
 
 E0054 TypeMismatchedException
 Input: true?42.5>5*8:15
@@ -674,12 +674,12 @@ Passed !
 E0096 Error in ?:
 Input: :
 Expected output: TrinaryOperationException
-Error: unable to detect errors in an incorrect input (output = 0). 
+Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
 
 E0097 Miss Operand
 Input: ?:
 Expected output: MissingOperandException
-Warning: exception is not an expected type (exceptions.TrinaryOperationException: Syntactic error in trinary operation.). 
+Passed !
 
 E0098 Function call error.
 Input: sin0.23)
@@ -814,7 +814,7 @@ Passed !
 E0124 SyntacticException.
 Input: 3.14 * 2 >= 2.5 * 3 ? (6 : 7) + 8
 Expected output: TrinaryOperationException
-Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 E0125 SyntacticException.
 Input: (2 + 3) ^ 3) - ((1 + 1)
@@ -849,32 +849,32 @@ Passed !
 C1005 A simple expression.
 Input: 1>2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1006 A simple expression.
 Input: 1>=2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1007 A simple expression.
 Input: 1=2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1008 A simple expression.
 Input: 1< 2 ?3:4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1009 A simple expression.
 Input: 1<=2 ? 3 : 4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1010 A simple expression.
 Input: 1<>2 ? 3 : 4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1011 Expression with arithmetic operations.
 Input: 2.25E+2 - (55.5 + 4 * (10 / 2) ^ 2)
@@ -894,32 +894,32 @@ Passed !
 C1014 Expression with relational and logical operations.
 Input: 1>2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1015 Expression with relational and logical operations.
 Input: 1>=2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1016 Expression with relational and logical operations.
 Input: 1=2 ? 3 : 4
 Expected output: 4
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1017 Expression with relational and logical operations.
 Input: 1< 2 ?3:4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1018 Expression with relational and logical operations.
 Input: 1<=2 ? 3 : 4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1019 Expression with relational and logical operations.
 Input: 1<>2 ? 3 : 4
 Expected output: 3
-Error: wrong detection for a correct input (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 C1020 Expression with arithmetic operations.
 Input: 2.25E+2 - (55.5 + -4 * (10 / 2) ^ 2)
@@ -979,7 +979,7 @@ Passed !
 C1031 A simple expression with min.
 Input: MIN(7e3,3.14e-0)
 Expected output: 3.14
-Error: wrong detection for a correct input (exceptions.IllegalIdentifierException: Not a predefined identifier.). 
+Passed !
 
 C1032 Expression with arithmetic operations.
 Input:  (60 + 2 *( (12 / 4) ^ 2))+1.22E+2
@@ -1194,12 +1194,12 @@ Passed !
 E1036 Error in ?:
 Input: :
 Expected output: TrinaryOperationException
-Error: unable to detect errors in an incorrect input (output = 0). 
+Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
 
 E1037 Miss Operand
 Input: ?:
 Expected output: MissingOperandException
-Warning: exception is not an expected type (exceptions.TrinaryOperationException: Syntactic error in trinary operation.). 
+Passed !
 
 E1038 Function call error.
 Input: sin0.23)
@@ -1334,7 +1334,7 @@ Passed !
 E1064 SyntacticException.
 Input: 3.14 * 2 >= 2.5 * 3 ? (6 : 7) + 8
 Expected output: TrinaryOperationException
-Warning: exception is not an expected type (exceptions.TypeMismatchedException: Type mismatched.). 
+Passed !
 
 E1065 SyntacticException.
 Input: (2 + 3) ^ 3) - ((1 + 1)
@@ -1579,8 +1579,8 @@ Passed !
 --------------------------------------------------------
 Statistics Report (315 test cases):
 
-	Passed case(s): 277 (87.93650793650794%)
-	Warning case(s): 10 (3.1746031746031744%)
-	Failed case(s): 28 (8.88888888888889%)
+	Passed case(s): 307 (97.46031746031746%)
+	Warning case(s): 8 (2.5396825396825395%)
+	Failed case(s): 0 (0.0%)
 ========================================================
 

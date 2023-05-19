@@ -206,9 +206,14 @@ public class Scanner {
 				return new Token(this.expression.substring(start, this.pos), 5);
 			}
 
-			if(str.equals("max") || str.equals("min")) {
-				return new Token(this.expression.substring(start, this.pos), 20);
+			if(str.equals("max") || str.equals("MAX")) {
+				return new Token("max", 20);
 			}
+
+			if(str.equals("min") || str.equals("MIN")) {
+				return new Token("min", 20);
+			}
+			
 
 			if (str.equals("true") || str.equals("True") || str.equals("TRUE"))
 			// if(str == "true" || str == "TRUE" || str == "True")
