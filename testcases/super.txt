@@ -361,10 +361,10 @@ Input: 3.14*2>=2.5*3?(6:7)+8
 Expected output: TrinaryOperationException
 Passed !
 
-E0034 MissingOperandException
+E0034 TrinaryOperationException
 Input: 7>0?7<=0?:6:5
-Expected output: MissingOperandException
-Warning: exception is not an expected type (exceptions.TrinaryOperationException: Syntactic error in trinary operation.). 
+Expected output: TrinaryOperationException
+Passed !
 
 E0035 MissingOperandException
 Input: sin()
@@ -401,10 +401,10 @@ Input: max(17, , 87)
 Expected output: MissingOperandException
 Passed !
 
-E0042 MissingOperandException
+E0042 TrinaryOperationException
 Input: true?: 5
-Expected output: MissingOperandException
-Warning: exception is not an expected type (exceptions.TrinaryOperationException: Syntactic error in trinary operation.). 
+Expected output: TrinaryOperationException
+Passed !
 
 E0043 MissingOperandException
 Input: 2+(?4:5)
@@ -444,12 +444,12 @@ Passed !
 E0050 TrinaryOperationException
 Input: 6?7:7:9
 Expected output: TypeMismatchedException
-Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
+Passed !
 
-E0051 TrinaryOperationException
+E0051 TypeMismatchedException
 Input: 5?(8:8)
-Expected output: TrinaryOperationException
-Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
+Expected output: TypeMismatchedException
+Passed !
 
 E0052 TypeMismatchedException
 Input: (13 < 2 * 5) + 12
@@ -459,7 +459,7 @@ Passed !
 E0053 TypeMismatchedException
 Input: 12?34:56
 Expected output: TypeMismatchedException
-Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
+Passed !
 
 E0054 TypeMismatchedException
 Input: true?42.5>5*8:15
@@ -494,7 +494,7 @@ Passed !
 E0060 TypeMismatchedException
 Input: max(54, true)
 Expected output: TypeMismatchedException
-Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
+Passed !
 
 E0061 IllegalSymbolException
 Input: (5 @ 4) ? 7 : 8
@@ -674,7 +674,7 @@ Passed !
 E0096 Error in ?:
 Input: :
 Expected output: TrinaryOperationException
-Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
+Passed !
 
 E0097 Miss Operand
 Input: ?:
@@ -1194,7 +1194,7 @@ Passed !
 E1036 Error in ?:
 Input: :
 Expected output: TrinaryOperationException
-Warning: exception is not an expected type (exceptions.MissingOperandException: An operand is expected.). 
+Passed !
 
 E1037 Miss Operand
 Input: ?:
@@ -1579,8 +1579,8 @@ Passed !
 --------------------------------------------------------
 Statistics Report (315 test cases):
 
-	Passed case(s): 307 (97.46031746031746%)
-	Warning case(s): 8 (2.5396825396825395%)
+	Passed case(s): 315 (100.0%)
+	Warning case(s): 0 (0.0%)
 	Failed case(s): 0 (0.0%)
 ========================================================
 

@@ -434,9 +434,9 @@
 </test-case>
 <test-case>
 	<id>E0034</id>
-	<description>MissingOperandException</description>
+	<description>TrinaryOperationException</description>
 	<input><![CDATA[7>0?7<=0?:6:5]]></input>
-	<exception>MissingOperandException</exception>
+	<exception>TrinaryOperationException</exception>
 </test-case>
 <test-case>
 	<id>E0035</id>
@@ -482,9 +482,9 @@
 </test-case>
 <test-case>
 	<id>E0042</id>
-	<description>MissingOperandException</description>
+	<description>TrinaryOperationException</description>
 	<input>true?: 5</input>
-	<exception>MissingOperandException</exception>
+	<exception>TrinaryOperationException</exception>
 </test-case>
 <test-case>
 	<id>E0043</id>
@@ -536,9 +536,9 @@
 </test-case>
 <test-case>
 	<id>E0051</id>
-	<description>TrinaryOperationException</description>
+	<description>TypeMismatchedException</description>
 	<input>5?(8:8)</input>
-	<exception>TrinaryOperationException</exception>
+	<exception>TypeMismatchedException</exception>
 </test-case>
 <test-case>
 	<id>E0052</id>

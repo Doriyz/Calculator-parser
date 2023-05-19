@@ -57,6 +57,11 @@ public class Parser {
 			}
 		}
 		
+		Token secondLastToken = null;
+		if(this.tokens.size() > 2){
+			secondLastToken = this.tokens.get(this.tokens.size() - 3);
+		}
+
 		// check next token
 		Token nextToken = this.scanner.getNextToken(); // the same as token
 		nextToken = this.scanner.getNextToken(); // get the next token
@@ -67,10 +72,23 @@ public class Parser {
 
 		// if the next token is ?
 		if(token.content.equals("?")){
-			if(lastToken == null || lastToken.type != 12){
+			if(lastToken == null){
 				throw new MissingOperandException();
-			}	
+			}	 
+			if(lastToken.type != 12) throw new TypeMismatchedException();
 		}
+
+		// if the next token is :
+		if(token.content.equals(":")){
+			if(lastToken == null || lastToken.type != 11){
+				throw new TrinaryOperationException();
+			}	
+			if(secondLastToken == null || !secondLastToken.content.equals("?")){
+				throw new TrinaryOperationException();
+			}
+		}
+		
+		
 
 		// if next token is &
 		if(nextToken.content.equals("$")){
@@ -154,6 +172,10 @@ public class Parser {
 			throw new MissingOperatorException("");
 		}
 
+		if(newToken.type == 12 && lastToken != null && lastToken.type == 6 && !nextToken.content.equals("?")){
+			throw new TypeMismatchedException();
+		}
+
 		if(newToken.type == 12 && nextToken.content.equals(":")) {
 			throw new TypeMismatchedException();
 		}
@@ -162,6 +184,7 @@ public class Parser {
 			// type=9 may be dealt with trinary operator usage 
 			throw new MissingOperatorException("");
 		}
+
 	}
 
 	/**
